@@ -1,5 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
   devServer: {
@@ -12,14 +15,23 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.scss'],
+    modules: ['node_modules', path.resolve(__dirname, 'src')],
   },
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.(gif|svg|jpg|png)$/,
+        loader: 'file-loader',
       },
     ],
   },
