@@ -1,28 +1,24 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import '../board/board.scss';
 
 export const Board: React.FC = () => {
-  const cells = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const cells: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <div className="board">
-      {' '}
       <table>
-        {cells.map((block) =>
-          block % 3 === 1 ? (
-            <tr className="firstrow">
-              <td className="cell" data-cell key={block}>
-                {block}
-              </td>
-            </tr>
-          ) : (
-            <tr className="secondrow">
-              <td className="cell" data-cell key={block}>
-                {block}
-              </td>
-            </tr>
-          ),
-        )}{' '}
+        <thead>
+          <tr>
+            {cells.map((next, ind) => (
+              <th key={ind}>{next}</th>
+            ))}
+          </tr>
+        </thead>
       </table>
+      <NavLink to="/" activeClassName="boardLink">
+        <button>Return to login</button>
+      </NavLink>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 export const loginHelper = (username: string, descript: string) => {
   if (!username || !descript) {
-    setTimeout(() => console.error('no inputs detected'), 1000);
+    alert('no inputs detected');
   } else {
-    console.log('logging in');
+    return 'logging in';
   }
 };

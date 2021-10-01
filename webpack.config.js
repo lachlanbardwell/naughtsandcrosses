@@ -7,6 +7,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 module.exports = {
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
   mode: 'development',
   entry: path.resolve(__dirname, 'src', 'client', 'index.tsx'),

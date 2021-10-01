@@ -1,17 +1,28 @@
 import React, { ChangeEvent, useState } from 'react';
-import '../login/login.scss';
+import { Redirect } from 'react-router-dom';
 import { loginHelper } from 'client/utils/login';
-
+import '../login/login.scss';
 import logo from 'shared/images/1476.gif';
+interface IformState {
+  username: string;
+  descript: string;
+}
 
 export const UserLogin: React.FC = () => {
-  const [formState, setFormState] = useState({ username: '', descript: '' });
+  const [formState, setFormState] = useState<IformState>({
+    username: '',
+    descript: '',
+  });
   const [isLoading, setisLoading] = useState<boolean>(false);
+  const [redirect, setRedirect] = useState<boolean>(false);
 
   const handleSubmit: () => void = () => {
-    setisLoading(true);
-    loginHelper(formState.username, formState.descript);
-    setTimeout(() => setisLoading(false), 1500);
+    let validate = loginHelper(formState.username, formState.descript);
+    validate === 'logging in'
+      ? (setisLoading(true),
+        setTimeout(() => setRedirect(true), 2000),
+        console.log('logging in...'))
+      : null;
   };
 
   const handleChange = (field: keyof typeof formState) => {
@@ -38,11 +49,14 @@ export const UserLogin: React.FC = () => {
           value={formState.descript}
           onChange={handleChange('descript')}
         />
-        {isLoading === true ? (
-          <img src={logo} />
-        ) : (
-          <button onClick={handleSubmit}>Login</button>
-        )}
+        <div className="loginDiv">
+          {isLoading ? (
+            <img src={logo} />
+          ) : (
+            <button onClick={handleSubmit}>Login</button>
+          )}
+          {redirect ? <Redirect to="/game"></Redirect> : null}
+        </div>
       </div>
     </div>
   );
