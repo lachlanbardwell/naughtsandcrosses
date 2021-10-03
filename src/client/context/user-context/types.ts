@@ -1,9 +1,10 @@
 import { IUser } from 'client/types/user-form-state';
 
 export interface IUserContext {
-  newUser: (user: IUser) => void;
+  login: (user: IUser) => void;
   setUserSuccess: (isSuccess?: boolean) => void;
   state: IUserState;
+  logout: () => void;
 }
 
 export interface IUserState {
@@ -15,14 +16,9 @@ export interface IUserState {
 
 export type UserActions =
   | {
-      type: 'login' | 'success' | 'failure';
-    }
-  | {
-      field: string;
-      value: string;
-      type: 'field';
+      type: 'success' | 'failure' | 'logout';
     }
   | {
       user: IUser;
-      type: 'newUser';
+      type: 'login';
     };

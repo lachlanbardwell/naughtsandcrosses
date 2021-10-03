@@ -7,7 +7,7 @@ import logo from 'shared/images/1476.gif';
 import '../login/login.scss';
 
 export const UserLogin: React.FC = () => {
-  const { newUser, setUserSuccess, state } = useContext(UserContext);
+  const { login, setUserSuccess, state } = useContext(UserContext);
   const [formState, setFormState] = useState<IUser>({
     descript: '',
     username: '',
@@ -21,9 +21,10 @@ export const UserLogin: React.FC = () => {
       return;
     }
 
-    setTimeout(() => setUserSuccess(true), 2000);
-    setTimeout(() => console.log(formState), 3000);
-    newUser(formState);
+    login(formState);
+    setTimeout(() => {
+      setUserSuccess(true);
+    }, 2000);
   };
 
   const handleChange = (field: keyof typeof formState) => {

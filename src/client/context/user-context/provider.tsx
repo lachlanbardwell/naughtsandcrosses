@@ -7,10 +7,14 @@ import { userReducer } from './reducer';
 export const UserProvider: React.FC = (props) => {
   const [state, dispatch] = useReducer(userReducer, initialUserState);
 
+  const logout = useCallback(() => {
+    dispatch({ type: 'logout' });
+  }, []);
+
   // Adds user data to store
-  const newUser = useCallback((user: IUser) => {
+  const login = useCallback((user: IUser) => {
     console.log('called', user);
-    dispatch({ type: 'newUser', user });
+    dispatch({ type: 'login', user });
   }, []);
 
   // Updates the success/failure state in store
@@ -21,7 +25,7 @@ export const UserProvider: React.FC = (props) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ newUser, setUserSuccess, state }}>
+    <UserContext.Provider value={{ logout, login, setUserSuccess, state }}>
       {props.children}
     </UserContext.Provider>
   );

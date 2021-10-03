@@ -1,11 +1,22 @@
-import React from 'react';
+import { UserContext } from 'client/context';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import './return-button.scss';
 
 export const ReturnButton: React.FC = () => {
+  const { logout } = useContext(UserContext);
+  const history = useHistory();
+
   return (
-    <NavLink to="/" activeClassName="boardLink">
-      <button id="returnButton">Return to login</button>
-    </NavLink>
+    <button
+      id="returnButton"
+      onClick={() => {
+        logout();
+        history.push('/');
+      }}
+    >
+      Logout
+    </button>
   );
 };

@@ -7,21 +7,11 @@ export const userReducer = (
   action: UserActions,
 ): IUserState => {
   switch (action.type) {
-    case 'field': {
+    case 'logout': {
       return {
         ...state,
-        user: {
-          ...(state.user as IUser),
-          [action.field]: action.value,
-        },
-      };
-    }
-
-    case 'login': {
-      return {
-        ...state,
-        isLoading: true,
-        error: false,
+        isLoggedIn: false,
+        user: undefined,
       };
     }
 
@@ -42,11 +32,11 @@ export const userReducer = (
         isLoggedIn: false,
       };
     }
-    case 'newUser': {
+    case 'login': {
       return {
         error: false,
-        isLoading: false,
-        isLoggedIn: true,
+        isLoading: true,
+        isLoggedIn: false,
         user: { ...state.user, ...action.user },
       };
     }
