@@ -1,31 +1,34 @@
-import React, { ChangeEvent, useState, useReducer } from 'react';
-import { Redirect } from 'react-router-dom';
+import { UserContext } from 'client/context';
+import { IUser } from 'client/types/user-form-state';
 import { loginHelper } from 'client/utils/login';
-import { reducer as loginReducer } from 'client/context/reducer';
-import '../login/login.scss';
+import React, { ChangeEvent, useContext, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import logo from 'shared/images/1476.gif';
-import { initialUserState } from 'client/context/default-user';
+import '../login/login.scss';
 
 export const UserLogin: React.FC = () => {
-  const [state, dispatch] = useReducer(loginReducer, initialUserState);
-  const { formState, isLoading, isLoggedIn } = state;
+  const { newUser, setUserSuccess, state } = useContext(UserContext);
+  const [formState, setFormState] = useState<IUser>({
+    descript: '',
+    username: '',
+  });
 
   const handleSubmit: () => void = () => {
     console.log(state);
     let validate = loginHelper(formState.username, formState.descript);
-    validate === 'logging in'
-      ? (dispatch({ type: 'login' }),
-        setTimeout(() => dispatch({ type: 'success' }), 2000))
-      : dispatch({ type: 'failure' });
+    if (validate !== 'logging in') {
+      setUserSuccess(false);
+      return;
+    }
+
+    setTimeout(() => setUserSuccess(true), 2000);
+    setTimeout(() => console.log(formState), 3000);
+    newUser(formState);
   };
 
   const handleChange = (field: keyof typeof formState) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
-      dispatch({
-        type: 'field',
-        field: field,
-        value: event.target.value,
-      });
+      setFormState((prev) => ({ ...prev, [field]: event.target.value }));
     };
   };
 
@@ -48,12 +51,12 @@ export const UserLogin: React.FC = () => {
           onChange={handleChange('descript')}
         />
         <div className="loginDiv">
-          {isLoading ? (
+          {state.isLoading ? (
             <img src={logo} />
           ) : (
             <button onClick={handleSubmit}>Login</button>
           )}
-          {isLoggedIn ? <Redirect to="/game"></Redirect> : null}
+          {state.isLoggedIn ? <Redirect push to="/game"></Redirect> : null}
           {state.error && <h3>One or more required fields missing</h3>}
         </div>
       </div>

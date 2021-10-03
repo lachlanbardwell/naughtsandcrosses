@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import { IUser } from 'client/types/user-form-state';
+import { IUserState, UserActions } from './types';
 
-export const reducer = (state: any, action: any) => {
+// TODO: Type
+export const userReducer = (
+  state: IUserState,
+  action: UserActions,
+): IUserState => {
   switch (action.type) {
     case 'field': {
-      // console.log(action.field);
-      // console.log(action.value);
-      // console.log(state.formState);
       return {
         ...state,
-        formState: {
-          ...state.formState,
+        user: {
+          ...(state.user as IUser),
           [action.field]: action.value,
         },
       };
     }
+
     case 'login': {
       return {
         ...state,
@@ -21,6 +24,7 @@ export const reducer = (state: any, action: any) => {
         error: false,
       };
     }
+
     case 'success': {
       return {
         ...state,
@@ -29,6 +33,7 @@ export const reducer = (state: any, action: any) => {
         isLoggedIn: true,
       };
     }
+
     case 'failure': {
       return {
         ...state,
@@ -37,9 +42,18 @@ export const reducer = (state: any, action: any) => {
         isLoggedIn: false,
       };
     }
+    case 'newUser': {
+      return {
+        error: false,
+        isLoading: false,
+        isLoggedIn: true,
+        user: { ...state.user, ...action.user },
+      };
+    }
 
     default:
       break;
   }
+
   return state;
 };

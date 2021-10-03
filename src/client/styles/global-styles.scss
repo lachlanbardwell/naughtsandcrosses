@@ -11,11 +11,11 @@ button {
   border-radius: 5px;
   font-size: 20px;
   border-width: 1px;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 button:hover {
   transition: 500ms;
   cursor: pointer;
-  box-shadow: 2px 2px 0 rgb(177, 177, 177);
+  box-shadow: 2px 2px 0 #b1b1b1;
 }

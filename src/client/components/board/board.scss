@@ -1,3 +1,19 @@
+.board {
+  width: 100vw;
+  height: 80vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(3, auto);
+}
+
 .boardLink {
   text-decoration: none;
+}
+
+.cells {
+  background-color: #ffc0cb;
+  width: 100px;
+  height: 100px;
+  border: solid 1px white;
 }

@@ -1,15 +1,17 @@
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = process.env.NODE_ENV === 'DEVELOPMENT';
 
 module.exports = {
   devServer: {
     port: 3000,
     historyApiFallback: true,
   },
-  mode: 'development',
+  devtool: isDevelopment ? 'source-map' : 'none',
+  mode: isDevelopment ? 'development' : 'production',
   entry: path.resolve(__dirname, 'src', 'client', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -27,8 +29,12 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
+        loader: 'ts-loader',
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        options: {
+          // disable type checker - we will use it in fork plugin
+          transpileOnly: true,
+        },
       },
       {
         test: /\.(gif|svg|jpg|png)$/,
@@ -37,6 +43,7 @@ module.exports = {
     ],
   },
   plugins: [
+    ...(isDevelopment ? [new ForkTsCheckerWebpackPlugin()] : []),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'client', 'index.html'),
     }),

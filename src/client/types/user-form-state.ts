@@ -1,4 +1,4 @@
-export interface IformState {
+export interface IUser {
   username: string;
   descript: string;
 }
