@@ -6,9 +6,8 @@ export const SessionDetails: React.FC = () => {
   const { state, login } = useContext(UserContext);
 
   return (
-    <div>
-      <button onClick={() => console.log('shanefat')}>LOG SHANES WEIGHT</button>
-      {`Logged in as ${state.isLoggedIn}`}
+    <div className="sessionDiv">
+      <span className="sessionSpan">{`Logged in as ${state.user?.username} - The player who is ${state.user?.descript}`}</span>
     </div>
   );
 };

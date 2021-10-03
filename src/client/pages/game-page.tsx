@@ -7,8 +7,8 @@ export const GamePage: React.FC = () => {
   return (
     <>
       <Board />
-      <ReturnButton />
       <SessionDetails />
+      <ReturnButton />
     </>
   );
 };
