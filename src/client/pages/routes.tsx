@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import { GamePage } from './game-page';
 import { LoginPage } from './login-page';
 

@@ -1,26 +1,40 @@
-.loginDiv {
-  margin-left: 40%;
-  margin-top: 20px;
-}
-
-.loginContainer {
-  background-color: rgb(255, 248, 249);
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.userInput {
-  margin-left: 40%;
-  margin-bottom: 10px;
-}
-
-.descriptInput {
-  margin-left: 40%;
+h3 {
+  color: rgb(250, 66, 66);
 }
 
 .formHeading {
   font-size: 50px;
   display: flex;
   justify-content: center;
+  margin: 20px;
+}
+
+.loginDiv {
+  margin-left: 40%;
+  margin-top: 20px;
+}
+
+.loginDiv > h3 {
+  margin-left: -20%;
+  padding: 10px;
+}
+
+.loginForm {
+  margin-left: -20%;
+}
+
+.loginContainer {
+  background-color: rgb(255, 248, 249);
+  display: inline-block;
+  margin: 20px;
+}
+
+.userInput {
+  margin-left: 40%;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.descriptInput {
+  margin-left: 40%;
 }

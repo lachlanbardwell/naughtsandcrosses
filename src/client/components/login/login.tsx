@@ -1,33 +1,31 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useReducer } from 'react';
 import { Redirect } from 'react-router-dom';
 import { loginHelper } from 'client/utils/login';
+import { reducer as loginReducer } from 'client/context/reducer';
 import '../login/login.scss';
 import logo from 'shared/images/1476.gif';
-interface IformState {
-  username: string;
-  descript: string;
-}
+import { initialUserState } from 'client/context/default-user';
 
 export const UserLogin: React.FC = () => {
-  const [formState, setFormState] = useState<IformState>({
-    username: '',
-    descript: '',
-  });
-  const [isLoading, setisLoading] = useState<boolean>(false);
-  const [redirect, setRedirect] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(loginReducer, initialUserState);
+  const { formState, isLoading, isLoggedIn } = state;
 
   const handleSubmit: () => void = () => {
+    console.log(state);
     let validate = loginHelper(formState.username, formState.descript);
     validate === 'logging in'
-      ? (setisLoading(true),
-        setTimeout(() => setRedirect(true), 2000),
-        console.log('logging in...'))
-      : null;
+      ? (dispatch({ type: 'login' }),
+        setTimeout(() => dispatch({ type: 'success' }), 2000))
+      : dispatch({ type: 'failure' });
   };
 
   const handleChange = (field: keyof typeof formState) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
-      setFormState((prev) => ({ ...prev, [field]: event.target.value }));
+      dispatch({
+        type: 'field',
+        field: field,
+        value: event.target.value,
+      });
     };
   };
 
@@ -55,7 +53,8 @@ export const UserLogin: React.FC = () => {
           ) : (
             <button onClick={handleSubmit}>Login</button>
           )}
-          {redirect ? <Redirect to="/game"></Redirect> : null}
+          {isLoggedIn ? <Redirect to="/game"></Redirect> : null}
+          {state.error && <h3>One or more required fields missing</h3>}
         </div>
       </div>
     </div>
