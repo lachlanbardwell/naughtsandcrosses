@@ -1,7 +1,6 @@
 import { UserContext } from 'client/context';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import './return-button.scss';
 
 export const ReturnButton: React.FC = () => {
@@ -12,8 +11,9 @@ export const ReturnButton: React.FC = () => {
     <button
       id="returnButton"
       onClick={() => {
+        console.log(history);
         logout();
-        history.push('/');
+        history.push({ pathname: '/' });
       }}
     >
       Logout

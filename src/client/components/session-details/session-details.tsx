@@ -1,9 +1,14 @@
 import { UserContext } from 'client/context';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './session-details.scss';
 
 export const SessionDetails: React.FC = () => {
   const { state, login } = useContext(UserContext);
+
+  // useEffect(() => {
+  //   console.log(Math.random() <= 0.5 ? 'Naughts' : 'Crosses');
+  //   console.log(state);
+  // }, []);
 
   return (
     <div className="sessionDiv">

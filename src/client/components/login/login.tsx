@@ -11,11 +11,12 @@ export const UserLogin: React.FC = () => {
   const [formState, setFormState] = useState<IUser>({
     descript: '',
     username: '',
+    team: '',
   });
 
   const handleSubmit: () => void = () => {
     console.log(state);
-    let validate = loginHelper(formState.username, formState.descript);
+    let validate = loginHelper(formState.username!, formState.descript!);
     if (validate !== 'logging in') {
       setUserSuccess(false);
       return;
@@ -36,7 +37,7 @@ export const UserLogin: React.FC = () => {
   return (
     <div className="loginContainer">
       <h2 className="formHeading">Enter your details</h2>
-      <div className="loginForm">
+      <form className="loginForm" onSubmit={handleSubmit}>
         <input
           className="userInput"
           type="text"
@@ -60,7 +61,8 @@ export const UserLogin: React.FC = () => {
           {state.isLoggedIn ? <Redirect push to="/game"></Redirect> : null}
           {state.error && <h3>One or more required fields missing</h3>}
         </div>
-      </div>
+      </form>
+      <button onClick={() => console.log(state)}>STATE</button>
     </div>
   );
 };

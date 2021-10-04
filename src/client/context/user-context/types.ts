@@ -1,5 +1,6 @@
 import { IUser } from 'client/types/user-form-state';
 
+//All context for state reducer
 export interface IUserContext {
   login: (user: IUser) => void;
   setUserSuccess: (isSuccess?: boolean) => void;
@@ -7,6 +8,7 @@ export interface IUserContext {
   logout: () => void;
 }
 
+//Structure of state
 export interface IUserState {
   error: boolean;
   isLoading: boolean;
@@ -21,4 +23,8 @@ export type UserActions =
   | {
       user: IUser;
       type: 'login';
+    }
+  | {
+      user: IUser;
+      type: 'Naughts' | 'Crosses';
     };

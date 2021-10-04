@@ -11,13 +11,13 @@ export const UserProvider: React.FC = (props) => {
     dispatch({ type: 'logout' });
   }, []);
 
-  // Adds user data to store
+  // Adds user data
   const login = useCallback((user: IUser) => {
     console.log('called', user);
     dispatch({ type: 'login', user });
   }, []);
 
-  // Updates the success/failure state in store
+  // Updates the success/failure state
   const setUserSuccess = useCallback((isSuccess?: boolean) => {
     dispatch({
       type: isSuccess ? 'success' : 'failure',

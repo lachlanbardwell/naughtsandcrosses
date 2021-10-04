@@ -1,7 +1,5 @@
-import { IUser } from 'client/types/user-form-state';
 import { IUserState, UserActions } from './types';
 
-// TODO: Type
 export const userReducer = (
   state: IUserState,
   action: UserActions,
@@ -18,8 +16,8 @@ export const userReducer = (
     case 'success': {
       return {
         ...state,
-        isLoading: false,
         error: false,
+        isLoading: false,
         isLoggedIn: true,
       };
     }
@@ -27,8 +25,8 @@ export const userReducer = (
     case 'failure': {
       return {
         ...state,
-        isLoading: false,
         error: true,
+        isLoading: false,
         isLoggedIn: false,
       };
     }

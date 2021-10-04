@@ -12,8 +12,13 @@
 }
 
 .cells {
-  background-color: #ffc0cb;
   width: 100px;
   height: 100px;
-  border: solid 1px white;
+  border: solid 1px #000000;
+}
+
+.cells:hover {
+  background-color: #dadada;
+  transition: 300ms;
+  cursor: pointer;
 }
