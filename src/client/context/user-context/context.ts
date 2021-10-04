@@ -7,4 +7,5 @@ export const UserContext = React.createContext<IUserContext>({
   setUserSuccess: () => null,
   state: initialUserState,
   logout: () => null,
+  setUserTeam: () => null,
 });

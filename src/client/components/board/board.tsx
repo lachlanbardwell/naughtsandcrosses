@@ -1,40 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../board/board.scss';
 import { UserContext } from 'client/context';
-import { IUser } from 'client/types/user-form-state';
 
 const cells: number[] = Array.from(Array(9).keys());
 
 export const Board: React.FC = () => {
-  const { state, login } = useContext(UserContext);
-  const [teamState, setTeamState] = useState<IUser>({
-    descript: state.user?.descript,
-    username: state.user?.username,
-    team: '',
-  });
+  const { state, setUserTeam } = useContext(UserContext);
   const [cross, setCross] = useState<boolean>(false);
   const [naught, setNaught] = useState<boolean>(false);
 
-  useEffect(() => {
-    setTeamState(
-      Math.random() <= 0.5
-        ? {
-            ...state.user,
-            team: 'Crosses',
-          }
-        : {
-            ...state.user,
-            team: 'Naughts',
-          },
-    );
-    console.log(teamState);
-  }, []);
-
   const setMark = () => {
-    if (!teamState.team) {
+    if (!state.user?.team) {
       console.error("team wasn't assigned");
     }
-    teamState.team === 'Crosses' ? setCross(true) : setNaught(true);
+    state.user?.team === 'Crosses' ? setCross(true) : setNaught(true);
   };
 
   return (
@@ -42,7 +21,7 @@ export const Board: React.FC = () => {
       {cells.map((cell) => (
         <div key={cell} className="cells" onClick={setMark}></div>
       ))}
-      <button onClick={() => console.log(teamState)}>STATE</button>
+      <button onClick={() => console.log(state)}>STATE</button>
     </div>
   );
 };

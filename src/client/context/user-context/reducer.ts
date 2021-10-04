@@ -39,6 +39,20 @@ export const userReducer = (
       };
     }
 
+    case 'Crosses': {
+      return {
+        ...state,
+        user: { ...state.user, team: 'Crosses' },
+      };
+    }
+
+    case 'Naughts': {
+      return {
+        ...state,
+        user: { ...state.user, team: 'Naughts' },
+      };
+    }
+
     default:
       break;
   }

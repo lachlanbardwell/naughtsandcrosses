@@ -6,6 +6,7 @@ export interface IUserContext {
   setUserSuccess: (isSuccess?: boolean) => void;
   state: IUserState;
   logout: () => void;
+  setUserTeam: (isCrosses?: boolean) => void;
 }
 
 //Structure of state
@@ -25,6 +26,5 @@ export type UserActions =
       type: 'login';
     }
   | {
-      user: IUser;
       type: 'Naughts' | 'Crosses';
     };

@@ -24,8 +24,16 @@ export const UserProvider: React.FC = (props) => {
     });
   }, []);
 
+  const setUserTeam = useCallback((isCrosses?: boolean) => {
+    dispatch({
+      type: isCrosses ? 'Crosses' : 'Naughts',
+    });
+  }, []);
+
   return (
-    <UserContext.Provider value={{ logout, login, setUserSuccess, state }}>
+    <UserContext.Provider
+      value={{ logout, login, setUserSuccess, setUserTeam, state }}
+    >
       {props.children}
     </UserContext.Provider>
   );
