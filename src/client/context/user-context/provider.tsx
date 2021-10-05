@@ -13,7 +13,6 @@ export const UserProvider: React.FC = (props) => {
 
   // Adds user data
   const login = useCallback((user: IUser) => {
-    console.log('called', user);
     dispatch({ type: 'login', user });
   }, []);
 

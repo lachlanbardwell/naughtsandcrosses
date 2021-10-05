@@ -11,7 +11,6 @@ export const ReturnButton: React.FC = () => {
     <button
       id="returnButton"
       onClick={() => {
-        console.log(history);
         logout();
         history.push({ pathname: '/' });
       }}

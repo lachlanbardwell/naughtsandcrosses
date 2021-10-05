@@ -2,6 +2,21 @@ h3 {
   color: #fa4242;
 }
 
+#inputLogin {
+  display: flex;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 20px;
+  border-width: 1px;
+  background-color: #ffffff;
+}
+
+#inputLogin:hover {
+  transition: 500ms;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #b1b1b1;
+}
+
 .formHeading {
   font-size: 50px;
   display: flex;

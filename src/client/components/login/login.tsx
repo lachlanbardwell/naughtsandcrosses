@@ -14,8 +14,8 @@ export const UserLogin: React.FC = () => {
     team: '',
   });
 
-  const handleSubmit: () => void = () => {
-    console.log(state);
+  const handleSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
     let validate = loginHelper(formState.username!, formState.descript!);
     if (validate !== 'logging in') {
       setUserSuccess(false);
@@ -56,7 +56,7 @@ export const UserLogin: React.FC = () => {
           {state.isLoading ? (
             <img src={logo} />
           ) : (
-            <button onClick={handleSubmit}>Login</button>
+            <input id="inputLogin" type="submit" value="Login"></input>
           )}
           {state.isLoggedIn ? <Redirect push to="/game"></Redirect> : null}
           {state.error && <h3>One or more required fields missing</h3>}

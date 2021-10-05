@@ -1,7 +1,7 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDevelopment = process.env.NODE_ENV === 'DEVELOPMENT';
 
@@ -25,7 +25,11 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.tsx?$/,

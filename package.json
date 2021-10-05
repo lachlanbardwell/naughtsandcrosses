@@ -9,7 +9,7 @@
     "tsstart": "ts-node src/index.ts",
     "watch": "tsc -w"
   },
-  "author": "lachlan bardwell",
+  "author": "Lachlan Bardwell",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^16.10.1",
