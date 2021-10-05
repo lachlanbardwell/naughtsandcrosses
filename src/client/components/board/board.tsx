@@ -5,11 +5,12 @@ import { UserContext } from 'client/context';
 const cells: number[] = Array.from(Array(9).keys());
 
 export const Board: React.FC = () => {
-  const { state, setUserTeam } = useContext(UserContext);
+  const { state } = useContext(UserContext);
   const [cross, setCross] = useState<boolean>(false);
   const [naught, setNaught] = useState<boolean>(false);
+  const [gameRunning, setGameRunning] = useState<true>(true);
 
-  const setMark = () => {
+  const setMark: () => void = () => {
     if (!state.user?.team) {
       console.error("team wasn't assigned");
     }
@@ -17,11 +18,16 @@ export const Board: React.FC = () => {
   };
 
   return (
-    <div className="board">
-      {cells.map((cell) => (
-        <div key={cell} className="cells" onClick={setMark}></div>
-      ))}
+    <>
+      <div className={state.user?.team === 'Crosses' ? 'cross' : 'naught'}>
+        {cells.map((cell) => (
+          <div className="cells" data-for={cell} key={cell} onClick={setMark}>
+            {/* {cross && <p>CROSS</p>}
+          {naught && <p>NAUGHT</p>} */}
+          </div>
+        ))}
+      </div>
       <button onClick={() => console.log(state)}>STATE</button>
-    </div>
+    </>
   );
 };

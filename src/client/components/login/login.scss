@@ -24,9 +24,12 @@ h3 {
 }
 
 .loginContainer {
-  background-color: #fff8f9;
+  background-color: #ffffff;
   display: inline-block;
+  justify-content: center;
   margin: 20px;
+  border: 1px solid #000000;
+  border-radius: 5px;
 }
 
 .userInput {
@@ -37,4 +40,12 @@ h3 {
 
 .descriptInput {
   margin-left: 40%;
+}
+
+@media (min-width: 750px) {
+  .loginContainer {
+    margin-top: 10%;
+    margin-left: 35%;
+    margin-right: 20%;
+  }
 }

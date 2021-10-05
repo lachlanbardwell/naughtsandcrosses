@@ -5,6 +5,12 @@
   padding: 0;
 }
 
+body {
+  background-image: linear-gradient(#eef7ee, #c9eec9d3);
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
 button {
   display: flex;
   padding: 7px 12px;
