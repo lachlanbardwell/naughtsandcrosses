@@ -39,23 +39,15 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
     <div>
       {state.user && (
         <div className="winning-div">
-          <button onClick={() => console.log(state)}>WIN MSG STATE</button>
           {state.user.team === props.winningTeam ? (
-            <>
-              <h2>{state.user.username} Wins!</h2>
-              {displayImage.map((url: string) => (
-                <video autoPlay loop src={url} key={url} />
-              ))}
-            </>
+            <h2>{state.user.username} Wins!</h2>
           ) : (
-            <>
-              <h2>'You Lose LoOoooOL!'</h2>
-              {displayImage.map((url: string) => (
-                <video autoPlay loop src={url} key={url} />
-              ))}
-            </>
+            <h2>'You Lose LoOoooOL!'</h2>
           )}
-
+          <br />
+          {displayImage.map((url: string) => (
+            <video width="40%" height="40%" autoPlay loop src={url} key={url} />
+          ))}
           <button
             onClick={() => {
               resetGame();
