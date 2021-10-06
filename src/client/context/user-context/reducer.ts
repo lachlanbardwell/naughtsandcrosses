@@ -52,6 +52,18 @@ export const userReducer = (
         user: { ...state.user, team: 'Naughts' },
       };
     }
+    case 'win': {
+      return {
+        ...state,
+        user: { ...state.user, winner: true },
+      };
+    }
+    case 'lose': {
+      return {
+        ...state,
+        user: { ...state.user, winner: false },
+      };
+    }
 
     default:
       break;

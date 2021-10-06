@@ -7,6 +7,7 @@ export interface IUserContext {
   state: IUserState;
   logout: () => void;
   setUserTeam: (isCrosses?: boolean) => void;
+  setUserWin: (isWinner?: boolean) => void;
 }
 
 //Structure of state
@@ -27,4 +28,12 @@ export type UserActions =
     }
   | {
       type: 'Naughts' | 'Crosses';
+    }
+  | {
+      type: 'win' | 'lose';
     };
+
+export interface IWinningTeam {
+  winningTeam: string;
+  setGameRunning: (isRunning: boolean) => void;
+}

@@ -10,7 +10,6 @@ export const GamePage: React.FC = () => {
       <SessionDetails />
       <Board />
       <ReturnButton />
-      <WinningMessage />
     </>
   );
 };

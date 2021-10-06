@@ -29,9 +29,15 @@ export const UserProvider: React.FC = (props) => {
     });
   }, []);
 
+  const setUserWin = useCallback((isWinner?: boolean) => {
+    dispatch({
+      type: isWinner ? 'win' : 'lose',
+    });
+  }, []);
+
   return (
     <UserContext.Provider
-      value={{ logout, login, setUserSuccess, setUserTeam, state }}
+      value={{ logout, login, setUserSuccess, setUserTeam, setUserWin, state }}
     >
       {props.children}
     </UserContext.Provider>

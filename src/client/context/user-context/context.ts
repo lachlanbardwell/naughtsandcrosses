@@ -8,4 +8,5 @@ export const UserContext = React.createContext<IUserContext>({
   state: initialUserState,
   logout: () => null,
   setUserTeam: () => null,
+  setUserWin: () => null,
 });
