@@ -10,11 +10,20 @@ export const SessionDetails: React.FC = () => {
     console.log(state);
   }, []);
 
+  const displayTeamName: (userTeam?: number) => string = (userTeam) => {
+    if (userTeam === 1) return 'Naughts';
+    return 'Crosses';
+  };
+
   return (
     <div className="sessionDiv">
       <span className="sessionSpanUser">{`Logged in as ${state.user?.username} - The player who is ${state.user?.descript}`}</span>
       <br />
-      <span className="sessionSpanTeam">{`Playing as ${state.user?.team}`}</span>
+      {state.user && (
+        <span className="sessionSpanTeam">{`Playing as ${displayTeamName(
+          state.user?.team,
+        )}`}</span>
+      )}
     </div>
   );
 };

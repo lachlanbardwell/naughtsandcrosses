@@ -48,7 +48,9 @@ module.exports = {
     ],
   },
   plugins: [
-    ...(isDevelopment ? [new ForkTsCheckerWebpackPlugin()] : []),
+    ...(isDevelopment
+      ? [new ForkTsCheckerWebpackPlugin()]
+      : [new MiniCssExtractPlugin()]),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'client', 'index.html'),
     }),

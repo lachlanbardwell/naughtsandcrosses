@@ -13,7 +13,7 @@ export const CellContainer = styled.div`
 
 CellContainer.displayName = 'CellContainer';
 
-export const CellBase = styled.div`
+export const CellBase = styled.div<ICellStyle>`
   display: flex;
   flex: 0 0 auto;
   width: 100px;
@@ -24,7 +24,7 @@ export const CellBase = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  cursor: pointer;
+  cursor: ${(props) => (props.isHover ? 'pointer' : 'not-allowed')};
 `;
 
 CellBase.displayName = 'CellBase';
@@ -60,7 +60,7 @@ export const CellWithCross = styled(CellBase)<ICellStyle>`
     width: 10px;
     height: 80px;
     border-radius: 2px;
-    ${(props) => (props.isHover ? 'opacity: 50%' : '')}
+    ${(props) => (props.isHover ? 'opacity: 50%' : '')};
   }
 
   &::before {

@@ -31,5 +31,5 @@ export const Cell: React.FC<ICellProps> = ({
     return <CellWithCross isHover onClick={onCellClick} />;
   }
 
-  return <CellBase onMouseOver={onMouseOver} />;
+  return <CellBase isHover onMouseOver={onMouseOver} />;
 };

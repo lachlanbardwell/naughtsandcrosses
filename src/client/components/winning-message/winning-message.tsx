@@ -4,21 +4,25 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import '../winning-message/winning-message.scss';
 
+const determineImage: () => number = () => {
+  return Math.round(Math.random() * 10);
+};
+
 export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   const { state, setUserWin } = useContext(UserContext);
-  const [image, setImage] = useState<string>('solitaire');
+  const [image, setImage] = useState<string>('');
   const [displayImage, setDisplayImage] = useState<string[]>([]);
 
   useEffect(() => {
     state.user && props.winningTeam === state.user.team
-      ? setImage('solitaire')
+      ? setImage('happy')
       : setImage('white guy blinking');
   }, []);
 
   useEffect(() => {
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${image}&limit=10&offset=0&rating=g&lang=en`,
+        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${image}&limit=11&offset=0&rating=g&lang=en`,
       )
       .then((res) =>
         setDisplayImage(
@@ -45,16 +49,14 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
             <h2>'You Lose LoOoooOL!'</h2>
           )}
           <br />
-          {displayImage.map((url: string) => (
-            <video width="40%" height="40%" autoPlay loop src={url} key={url} />
-          ))}
-          <button
-            onClick={() => {
-              resetGame();
-            }}
-          >
-            NEW GAME
-          </button>
+          <video
+            width="40%"
+            height="40%"
+            autoPlay
+            loop
+            src={displayImage[determineImage()]}
+          />
+          <button onClick={() => resetGame()}>NEW GAME</button>
         </div>
       )}
     </div>
