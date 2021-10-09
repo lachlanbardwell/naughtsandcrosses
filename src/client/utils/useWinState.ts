@@ -1,13 +1,15 @@
-import { TWinningTeam } from 'client/types/win-state';
+import { TeamType } from 'client/types/enums';
 import { useState, useEffect } from 'react';
 
-export const useWinState: (winningTeam: TWinningTeam) => string = (
-  winningTeam: TWinningTeam,
+export const useWinState: (winningTeam: TeamType) => TeamType = (
+  winningTeam: TeamType,
 ) => {
-  const [winState, setWinState] = useState('');
+  const [winState, setWinState] = useState(TeamType.DEFAULT);
 
   useEffect(() => {
-    setWinState(winningTeam === 'Crosses' ? 'Crosses' : 'Naughts');
+    setWinState(
+      winningTeam === TeamType.CROSS ? TeamType.CROSS : TeamType.NAUGHT,
+    );
   }, [winningTeam]);
 
   return winState;

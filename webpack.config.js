@@ -11,7 +11,7 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
   },
-  devtool: isDevelopment ? 'source-map' : 'none',
+  devtool: isDevelopment ? 'source-map' : false,
   mode: isDevelopment ? 'development' : 'production',
   entry: path.resolve(__dirname, 'src', 'client', 'index.tsx'),
   output: {

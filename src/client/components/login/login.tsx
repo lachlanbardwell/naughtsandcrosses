@@ -1,4 +1,5 @@
 import { UserContext } from 'client/context';
+import { TeamType } from 'client/types/enums';
 import { IUser } from 'client/types/user-form-state';
 import { loginHelper } from 'client/utils/login';
 import React, { ChangeEvent, useContext, useState } from 'react';
@@ -11,7 +12,7 @@ export const UserLogin: React.FC = () => {
   const [formState, setFormState] = useState<IUser>({
     descript: '',
     username: '',
-    team: '',
+    team: TeamType.DEFAULT,
   });
 
   const handleSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {

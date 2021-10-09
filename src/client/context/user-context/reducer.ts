@@ -1,4 +1,5 @@
 import { IUserState, UserActions } from './types';
+import { TeamType } from 'client/types/enums';
 
 export const userReducer = (
   state: IUserState,
@@ -42,14 +43,14 @@ export const userReducer = (
     case 'Crosses': {
       return {
         ...state,
-        user: { ...state.user, team: 'Crosses' },
+        user: { ...state.user, team: TeamType.CROSS },
       };
     }
 
     case 'Naughts': {
       return {
         ...state,
-        user: { ...state.user, team: 'Naughts' },
+        user: { ...state.user, team: TeamType.NAUGHT },
       };
     }
     case 'win': {

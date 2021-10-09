@@ -1,3 +1,4 @@
+import { TeamType } from 'client/types/enums';
 import { IUser } from 'client/types/user-form-state';
 
 //All context for state reducer
@@ -34,6 +35,6 @@ export type UserActions =
     };
 
 export interface IWinningTeam {
-  winningTeam: string;
+  winningTeam: TeamType;
   setGameRunning: (isRunning: boolean) => void;
 }

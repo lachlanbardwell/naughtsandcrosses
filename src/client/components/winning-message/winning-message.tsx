@@ -1,8 +1,8 @@
 import { UserContext } from 'client/context';
 import { IWinningTeam } from 'client/context/user-context/types';
 import React, { useContext, useEffect, useState } from 'react';
-import '../winning-message/winning-message.scss';
 import axios from 'axios';
+import '../winning-message/winning-message.scss';
 
 export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   const { state, setUserWin } = useContext(UserContext);
@@ -18,7 +18,7 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${image}&limit=1&offset=0&rating=g&lang=en`,
+        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${image}&limit=10&offset=0&rating=g&lang=en`,
       )
       .then((res) =>
         setDisplayImage(
