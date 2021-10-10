@@ -38,18 +38,42 @@ export const Board: React.FC = () => {
   const [gameRunning, setGameRunning] = useState<boolean>(true);
 
   useEffect(() => {
-    ///If 3 crosses or X's in a row on top row
+    let naughtClickedArray: number[] = [];
+    let crossClickedArray: number[] = [];
+    //Loop cellmap to create array of cells clicked for each team
+    for (const values of cellMap)
+      if (values.teamClicked == 1) {
+        naughtClickedArray.push(values.cellClicked as number);
+      } else if (values.teamClicked == 2) {
+        crossClickedArray.push(values.cellClicked as number);
+      }
+    //Check each winning combination against each team
     if (
-      cellMap.find((prev) => prev.cellClicked == 0) &&
-      cellMap.find((prev) => prev.cellClicked == 1) &&
-      cellMap.find((prev) => prev.cellClicked == 2)
+      [0, 1, 2].every((value) => naughtClickedArray.includes(value)) ||
+      [3, 4, 5].every((value) => naughtClickedArray.includes(value)) ||
+      [6, 7, 8].every((value) => naughtClickedArray.includes(value)) ||
+      [0, 3, 6].every((value) => naughtClickedArray.includes(value)) ||
+      [1, 4, 7].every((value) => naughtClickedArray.includes(value)) ||
+      [2, 5, 8].every((value) => naughtClickedArray.includes(value)) ||
+      [0, 4, 8].every((value) => naughtClickedArray.includes(value)) ||
+      [2, 4, 6].every((value) => naughtClickedArray.includes(value))
     ) {
-      console.log('someone wins!');
       setUserWin(true);
       setGameRunning(false);
     }
-
-    console.log('cellmap', cellMap);
+    if (
+      [0, 1, 2].every((value) => crossClickedArray.includes(value)) ||
+      [3, 4, 5].every((value) => crossClickedArray.includes(value)) ||
+      [6, 7, 8].every((value) => crossClickedArray.includes(value)) ||
+      [0, 3, 6].every((value) => crossClickedArray.includes(value)) ||
+      [1, 4, 7].every((value) => crossClickedArray.includes(value)) ||
+      [2, 5, 8].every((value) => crossClickedArray.includes(value)) ||
+      [0, 4, 8].every((value) => crossClickedArray.includes(value)) ||
+      [2, 4, 6].every((value) => crossClickedArray.includes(value))
+    ) {
+      setUserWin(true);
+      setGameRunning(false);
+    }
   }, [cellMap]);
 
   useEffect(() => {
