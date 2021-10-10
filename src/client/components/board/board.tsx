@@ -1,90 +1,104 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { UserContext } from 'client/context';
-import { IUser } from 'client/types/user-form-state';
-import { useWinState } from 'client/utils/useWinState';
+import { ICellMap } from 'client/context/user-context/types';
 import { WinningMessage } from '../winning-message/winning-message';
 import '../board/board.scss';
 import { CellContainer } from './board.styles';
 import { Cell } from './cell';
 import { TeamType } from 'client/types/enums';
 
-interface ICellMap {
-  cellClicked: number;
-  teamClicked?: TeamType;
-}
-
 export const Board: React.FC = () => {
   const { state, setUserWin, setUserTeam } = useContext(UserContext);
+  //Initial setting of user team randomly to naughts or crosses
   useCallback(
     () => (Math.random() > 0.5 ? setUserTeam(true) : setUserTeam(false)),
     [],
   );
+  //Initial state map of cells to create empty board
+  const [cellState, setCellState] = useState(() =>
+    Array.from(Array(9).keys()).map(() => TeamType.DEFAULT),
+  );
+  //Reference for position of each cell from the map
+  const [cellIndex, setCellIndex] = useState<number>(-1);
 
+  //State for clearing board on reset
+  const [clearBoard, setClearBoard] = useState(false);
+  //2d Array to replicate board and check for win conditions
   const gridArray = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
   ];
 
-  //passing in initial winning team as always losing loooool
-  const winningTeam = useWinState((state.user?.team as TeamType) === 1 ? 2 : 1);
-  const [cellIndex, setCellIndex] = useState<number>(-1);
-  const [cellState, setCellState] = useState(() =>
-    Array.from(Array(9).keys()).map(() => TeamType.DEFAULT),
-  );
-
-  const cellsClicked: [ICellMap?] = [];
+  //State for mapping clicked cells to check for win conditions
+  const [cellMap, setCellMap] = useState<ICellMap[]>([
+    { cellClicked: -1, teamClicked: -1 },
+  ]);
 
   const [gameRunning, setGameRunning] = useState<boolean>(true);
 
   useEffect(() => {
-    ///If 3 crosses or X's in a row
-    if (TeamType.CROSS) {
-      console.log('crossssssss', TeamType.CROSS);
+    ///If 3 crosses or X's in a row on top row
+    if (
+      cellMap.find((prev) => prev.cellClicked == 0) &&
+      cellMap.find((prev) => prev.cellClicked == 1) &&
+      cellMap.find((prev) => prev.cellClicked == 2)
+    ) {
+      console.log('someone wins!');
+      setUserWin(true);
+      setGameRunning(false);
     }
-    console.log('winning team is', winningTeam);
 
-    //
-    //if state.user.team === winningTeam setUserWin(true) : setUserWin(false)
-  }, []);
+    console.log('cellmap', cellMap);
+  }, [cellMap]);
 
-  // const userCellType =
-  //   state.user?.team === userTeam ? TeamType.CROSS : TeamType.NAUGHT;
+  useEffect(() => {
+    //reset win checker map and board tiles only when child updates clearboard
+    setCellMap([{ cellClicked: -1, teamClicked: -1 }]);
+    clearBoard &&
+      setCellState(() =>
+        Array.from(Array(9).keys()).map(() => TeamType.DEFAULT),
+      );
+  }, [gameRunning]);
 
   const onCellHover = useCallback((nextIndex: number) => {
-    // console.log(nextIndex);
-    // console.log(state.user?.team);
-    // console.log('cellindex', nextIndex);
     setCellIndex(nextIndex);
   }, []);
 
-  const onCellClick = useCallback((nextIndex: number, type?: TeamType) => {
+  const onCellClick = (nextIndex: number, type?: TeamType) => {
     type &&
       setCellState((prev) =>
         prev.map((cell, index) => (index === nextIndex ? type : cell)),
       );
-    let selected = () => {
-      if (nextIndex <= 2)
-        return cellsClicked.push({
+
+    if (nextIndex <= 2) {
+      setCellMap((prev: ICellMap[]) => [
+        ...prev,
+        {
           cellClicked: gridArray[0][nextIndex],
           teamClicked: type,
-        });
-      if (nextIndex <= 5)
-        return cellsClicked.push({
+        },
+      ]);
+    } else if (nextIndex <= 5) {
+      setCellMap((prev: ICellMap[]) => [
+        ...prev,
+        {
           cellClicked: gridArray[1][nextIndex % 3],
           teamClicked: type,
-        });
-      if (nextIndex <= 8)
-        return cellsClicked.push({
+        },
+      ]);
+    } else {
+      setCellMap((prev: ICellMap[]) => [
+        ...prev,
+        {
           cellClicked: gridArray[2][nextIndex % 6],
           teamClicked: type,
-        });
-    };
-    selected();
+        },
+      ]);
+    }
+    setClearBoard(false);
     console.log('cellstate', cellState);
-    console.log('grid array', gridArray);
-    console.log('clicked cells', cellsClicked);
-  }, []);
+  };
 
   return (
     <>
@@ -99,8 +113,6 @@ export const Board: React.FC = () => {
           />
         ))}
       </CellContainer>
-      <button onClick={() => console.log(cellsClicked)}>CLICKED CELLS</button>
-      {/* SET USER WIN MAY BE SUPERFLUOUS */}
       <button
         onClick={() => {
           setUserWin(true);
@@ -117,11 +129,11 @@ export const Board: React.FC = () => {
       >
         U LOSE
       </button>
-      <button onClick={() => console.log(winningTeam)}>WinningTEAM</button>
+      <button onClick={() => console.log(state)}>STATE</button>
       <button onClick={() => setGameRunning(false)}>Game Finished</button>
       {!gameRunning && (
         <WinningMessage
-          winningTeam={winningTeam}
+          setClearBoard={setClearBoard}
           setGameRunning={setGameRunning}
         />
       )}

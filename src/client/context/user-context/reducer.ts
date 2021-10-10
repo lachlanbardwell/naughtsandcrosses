@@ -65,6 +65,12 @@ export const userReducer = (
         user: { ...state.user, winner: false },
       };
     }
+    case 'draw': {
+      return {
+        ...state,
+        user: { ...state.user, winner: undefined },
+      };
+    }
 
     default:
       break;

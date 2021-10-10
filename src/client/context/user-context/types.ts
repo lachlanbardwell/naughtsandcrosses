@@ -1,6 +1,11 @@
 import { TeamType } from 'client/types/enums';
 import { IUser } from 'client/types/user-form-state';
 
+export interface ICellMap {
+  cellClicked?: number;
+  teamClicked?: TeamType;
+}
+
 //All context for state reducer
 export interface IUserContext {
   login: (user: IUser) => void;
@@ -31,10 +36,10 @@ export type UserActions =
       type: 'Naughts' | 'Crosses';
     }
   | {
-      type: 'win' | 'lose';
+      type: 'win' | 'lose' | 'draw';
     };
 
 export interface IWinningTeam {
-  winningTeam: TeamType;
+  setClearBoard: (isClear: boolean) => void;
   setGameRunning: (isRunning: boolean) => void;
 }

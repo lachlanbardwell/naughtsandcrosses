@@ -14,9 +14,11 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   const [displayImage, setDisplayImage] = useState<string[]>([]);
 
   useEffect(() => {
-    state.user && props.winningTeam === state.user.team
+    state.user?.winner
       ? setImage('happy')
-      : setImage('white guy blinking');
+      : state.user?.winner == false
+      ? setImage('white guy blinking')
+      : setImage('pogchamp');
   }, []);
 
   useEffect(() => {
@@ -35,18 +37,21 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   }, [image]);
 
   const resetGame = () => {
-    // setUserWin(undefined);
+    setUserWin(undefined);
     props.setGameRunning(true);
+    props.setClearBoard(true);
   };
 
   return (
     <div>
       {state.user && (
         <div className="winning-div">
-          {state.user.team === props.winningTeam ? (
+          {state.user.winner === true ? (
             <h2>{state.user.username} Wins!</h2>
+          ) : state.user.winner == false ? (
+            <h2>You Lose LoOoooOL!</h2>
           ) : (
-            <h2>'You Lose LoOoooOL!'</h2>
+            <h2>It's a draw!</h2>
           )}
           <br />
           <video
@@ -56,7 +61,13 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
             loop
             src={displayImage[determineImage()]}
           />
-          <button onClick={() => resetGame()}>NEW GAME</button>
+          <button
+            onClick={() => {
+              resetGame();
+            }}
+          >
+            NEW GAME
+          </button>
         </div>
       )}
     </div>
