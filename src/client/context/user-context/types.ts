@@ -40,6 +40,8 @@ export type UserActions =
     };
 
 export interface IWinningTeam {
+  winningTeam: TeamType;
+  setWinningTeam: (team: TeamType) => void;
   setClearBoard: (isClear: boolean) => void;
   setGameRunning: (isRunning: boolean) => void;
 }

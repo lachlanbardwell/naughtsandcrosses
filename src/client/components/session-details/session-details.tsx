@@ -20,9 +20,9 @@ export const SessionDetails: React.FC = () => {
       <span className="sessionSpanUser">{`Logged in as ${state.user?.username} - The player who is ${state.user?.descript}`}</span>
       <br />
       {state.user && (
-        <span className="sessionSpanTeam">{`Playing as ${displayTeamName(
+        <span className="sessionSpanTeam">{`${displayTeamName(
           state.user?.team,
-        )}`}</span>
+        )} Turn`}</span>
       )}
     </div>
   );

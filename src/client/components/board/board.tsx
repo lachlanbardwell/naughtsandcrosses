@@ -19,7 +19,7 @@ const gridLookup = Object.freeze([
 ]);
 
 export const Board: React.FC = () => {
-  const { state, setUserWin, setUserTeam } = useContext(UserContext);
+  const { state, setUserTeam } = useContext(UserContext);
   //Initial setting of user team randomly to naughts or crosses
   useCallback(
     () => (Math.random() > 0.5 ? setUserTeam(true) : setUserTeam(false)),
@@ -34,7 +34,7 @@ export const Board: React.FC = () => {
 
   //State for clearing board on reset
   const [clearBoard, setClearBoard] = useState(false);
-
+  const [winningTeam, setWinningTeam] = useState<TeamType>(TeamType.DEFAULT);
   const [gameRunning, setGameRunning] = useState<boolean>(true);
 
   useEffect(() => {
@@ -50,13 +50,20 @@ export const Board: React.FC = () => {
     if (!match) {
       return;
     }
-    const winningTeam = cellState[match[0]];
-    winningTeam === state.user?.team ? setUserWin(true) : setUserWin(false);
+    setWinningTeam(cellState[match[0]]);
+  }, [cellState]);
+
+  useEffect(() => {
     //Draw condition
-    if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
-      setUserWin(undefined);
-      setGameRunning(false);
+    if (winningTeam) {
+      return;
     }
+    setTimeout(() => {
+      if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
+        setGameRunning(false);
+      }
+    }, 100);
+    console.log('winning team', winningTeam);
   }, [cellState]);
 
   useEffect(() => {
@@ -69,21 +76,24 @@ export const Board: React.FC = () => {
 
   useEffect(() => {
     //Ends game and displays result
-    state.user?.winner && setGameRunning(false);
-  }, [state.user?.winner]);
+    if (winningTeam == TeamType.CROSS || winningTeam == TeamType.NAUGHT)
+      setGameRunning(false);
+  }, [winningTeam]);
 
   const onCellHover = useCallback((nextIndex: number) => {
     setCellIndex(nextIndex);
   }, []);
 
-  const onCellClick = (nextIndex: number, type?: TeamType) => {
+  const onCellClick = useCallback((nextIndex: number, type?: TeamType) => {
     type &&
       setCellState((prev) =>
         prev.map((cell, index) => (index === nextIndex ? type : cell)),
       );
+    // changing state on each click
+    setUserTeam(type === TeamType.CROSS ? false : true);
     setClearBoard(false);
     console.log('cellstate', cellState);
-  };
+  }, []);
 
   return (
     <>
@@ -98,26 +108,10 @@ export const Board: React.FC = () => {
           />
         ))}
       </CellContainer>
-      <button
-        onClick={() => {
-          setUserWin(true);
-          console.log(state);
-        }}
-      >
-        U WIN
-      </button>
-      <button
-        onClick={() => {
-          setUserWin(false);
-          console.log(state);
-        }}
-      >
-        U LOSE
-      </button>
-      <button onClick={() => console.log(state)}>STATE</button>
-      <button onClick={() => setGameRunning(false)}>Game Finished</button>
       {!gameRunning && (
         <WinningMessage
+          winningTeam={winningTeam}
+          setWinningTeam={setWinningTeam}
           setClearBoard={setClearBoard}
           setGameRunning={setGameRunning}
         />

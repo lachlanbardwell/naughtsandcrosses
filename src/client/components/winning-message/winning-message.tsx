@@ -3,22 +3,19 @@ import { IWinningTeam } from 'client/context/user-context/types';
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import '../winning-message/winning-message.scss';
+import { TeamType } from 'client/types/enums';
 
 const determineImage: () => number = () => {
   return Math.round(Math.random() * 10);
 };
 
 export const WinningMessage: React.FC<IWinningTeam> = (props) => {
-  const { state, setUserWin } = useContext(UserContext);
+  const { state } = useContext(UserContext);
   const [image, setImage] = useState<string>('');
   const [displayImage, setDisplayImage] = useState<string[]>([]);
 
   useEffect(() => {
-    state.user?.winner
-      ? setImage('happy')
-      : state.user?.winner == false
-      ? setImage('white guy blinking')
-      : setImage('pogchamp');
+    props.winningTeam ? setImage('pogchamp') : setImage('white guy blinking');
   }, []);
 
   useEffect(() => {
@@ -37,7 +34,7 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   }, [image]);
 
   const resetGame = () => {
-    setUserWin(undefined);
+    props.setWinningTeam(TeamType.DEFAULT);
     props.setGameRunning(true);
     props.setClearBoard(true);
   };
@@ -46,10 +43,11 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
     <div>
       {state.user && (
         <div className="winning-div">
-          {state.user.winner === true ? (
-            <h2>{state.user.username} Wins!</h2>
-          ) : state.user.winner == false ? (
-            <h2>You Lose LoOoooOL!</h2>
+          {props.winningTeam ? (
+            <h2>
+              {state.user.username} Wins! Playing{' '}
+              {props.winningTeam == 1 ? 'Naughts' : 'Crosses'}{' '}
+            </h2>
           ) : (
             <h2>It's a draw!</h2>
           )}

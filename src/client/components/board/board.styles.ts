@@ -9,6 +9,7 @@ export const CellContainer = styled.div`
   width: 310px;
   height: 300px;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 CellContainer.displayName = 'CellContainer';

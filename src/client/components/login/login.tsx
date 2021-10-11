@@ -63,7 +63,6 @@ export const UserLogin: React.FC = () => {
           {state.error && <h3>One or more required fields missing</h3>}
         </div>
       </form>
-      <button onClick={() => console.log(state)}>STATE</button>
     </div>
   );
 };
