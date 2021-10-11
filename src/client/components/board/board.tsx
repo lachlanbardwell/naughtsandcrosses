@@ -1,11 +1,22 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { UserContext } from 'client/context';
-import { ICellMap } from 'client/context/user-context/types';
 import { WinningMessage } from '../winning-message/winning-message';
 import '../board/board.scss';
 import { CellContainer } from './board.styles';
 import { Cell } from './cell';
 import { TeamType } from 'client/types/enums';
+
+//Array of possible win conditions based on cell index #
+const gridLookup = Object.freeze([
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+]);
 
 export const Board: React.FC = () => {
   const { state, setUserWin, setUserTeam } = useContext(UserContext);
@@ -23,67 +34,43 @@ export const Board: React.FC = () => {
 
   //State for clearing board on reset
   const [clearBoard, setClearBoard] = useState(false);
-  //2d Array to replicate board and check for win conditions
-  const gridArray = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-  ];
-
-  //State for mapping clicked cells to check for win conditions
-  const [cellMap, setCellMap] = useState<ICellMap[]>([
-    { cellClicked: -1, teamClicked: -1 },
-  ]);
 
   const [gameRunning, setGameRunning] = useState<boolean>(true);
 
   useEffect(() => {
-    let naughtClickedArray: number[] = [];
-    let crossClickedArray: number[] = [];
-    //Loop cellmap to create array of cells clicked for each team
-    for (const values of cellMap)
-      if (values.teamClicked == 1) {
-        naughtClickedArray.push(values.cellClicked as number);
-      } else if (values.teamClicked == 2) {
-        crossClickedArray.push(values.cellClicked as number);
-      }
-    //Check each winning combination against each team
-    if (
-      [0, 1, 2].every((value) => naughtClickedArray.includes(value)) ||
-      [3, 4, 5].every((value) => naughtClickedArray.includes(value)) ||
-      [6, 7, 8].every((value) => naughtClickedArray.includes(value)) ||
-      [0, 3, 6].every((value) => naughtClickedArray.includes(value)) ||
-      [1, 4, 7].every((value) => naughtClickedArray.includes(value)) ||
-      [2, 5, 8].every((value) => naughtClickedArray.includes(value)) ||
-      [0, 4, 8].every((value) => naughtClickedArray.includes(value)) ||
-      [2, 4, 6].every((value) => naughtClickedArray.includes(value))
-    ) {
-      setUserWin(true);
+    const match = gridLookup.find(([cell1, cell2, cell3]) => {
+      const cellValue = cellState[cell1];
+      //Checks the first cell has been clicked and matches the win grid, then checks next 2 cells in order
+      return (
+        cellValue !== TeamType.DEFAULT &&
+        cellState[cell2] === cellValue &&
+        cellState[cell3] === cellValue
+      );
+    });
+    if (!match) {
+      return;
+    }
+    const winningTeam = cellState[match[0]];
+    winningTeam === state.user?.team ? setUserWin(true) : setUserWin(false);
+    //Draw condition
+    if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
+      setUserWin(undefined);
       setGameRunning(false);
     }
-    if (
-      [0, 1, 2].every((value) => crossClickedArray.includes(value)) ||
-      [3, 4, 5].every((value) => crossClickedArray.includes(value)) ||
-      [6, 7, 8].every((value) => crossClickedArray.includes(value)) ||
-      [0, 3, 6].every((value) => crossClickedArray.includes(value)) ||
-      [1, 4, 7].every((value) => crossClickedArray.includes(value)) ||
-      [2, 5, 8].every((value) => crossClickedArray.includes(value)) ||
-      [0, 4, 8].every((value) => crossClickedArray.includes(value)) ||
-      [2, 4, 6].every((value) => crossClickedArray.includes(value))
-    ) {
-      setUserWin(true);
-      setGameRunning(false);
-    }
-  }, [cellMap]);
+  }, [cellState]);
 
   useEffect(() => {
-    //reset win checker map and board tiles only when child updates clearboard
-    setCellMap([{ cellClicked: -1, teamClicked: -1 }]);
+    //Reset board tiles only when child updates clearboard
     clearBoard &&
       setCellState(() =>
         Array.from(Array(9).keys()).map(() => TeamType.DEFAULT),
       );
   }, [gameRunning]);
+
+  useEffect(() => {
+    //Ends game and displays result
+    state.user?.winner && setGameRunning(false);
+  }, [state.user?.winner]);
 
   const onCellHover = useCallback((nextIndex: number) => {
     setCellIndex(nextIndex);
@@ -94,32 +81,6 @@ export const Board: React.FC = () => {
       setCellState((prev) =>
         prev.map((cell, index) => (index === nextIndex ? type : cell)),
       );
-
-    if (nextIndex <= 2) {
-      setCellMap((prev: ICellMap[]) => [
-        ...prev,
-        {
-          cellClicked: gridArray[0][nextIndex],
-          teamClicked: type,
-        },
-      ]);
-    } else if (nextIndex <= 5) {
-      setCellMap((prev: ICellMap[]) => [
-        ...prev,
-        {
-          cellClicked: gridArray[1][nextIndex % 3],
-          teamClicked: type,
-        },
-      ]);
-    } else {
-      setCellMap((prev: ICellMap[]) => [
-        ...prev,
-        {
-          cellClicked: gridArray[2][nextIndex % 6],
-          teamClicked: type,
-        },
-      ]);
-    }
     setClearBoard(false);
     console.log('cellstate', cellState);
   };
