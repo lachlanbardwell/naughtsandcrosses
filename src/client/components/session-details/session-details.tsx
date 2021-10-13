@@ -17,12 +17,12 @@ export const SessionDetails: React.FC = () => {
 
   return (
     <div className="sessionDiv">
-      <span className="sessionSpanUser">{`Logged in as ${state.user?.username} - The player who is ${state.user?.descript}`}</span>
+      <h2 className="sessionUser">{`Logged in as ${state.user?.username} - The player who is ${state.user?.descript}`}</h2>
       <br />
       {state.user && (
-        <span className="sessionSpanTeam">{`${displayTeamName(
+        <h2 className="sessionTeam">{`${displayTeamName(
           state.user?.team,
-        )} Turn`}</span>
+        )} Turn`}</h2>
       )}
     </div>
   );

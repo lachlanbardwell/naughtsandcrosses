@@ -63,7 +63,6 @@ export const Board: React.FC = () => {
         setGameRunning(false);
       }
     }, 100);
-    console.log('winning team', winningTeam);
   }, [cellState]);
 
   useEffect(() => {
@@ -89,10 +88,9 @@ export const Board: React.FC = () => {
       setCellState((prev) =>
         prev.map((cell, index) => (index === nextIndex ? type : cell)),
       );
-    // changing state on each click
+    //Change state on each click
     setUserTeam(type === TeamType.CROSS ? false : true);
     setClearBoard(false);
-    console.log('cellstate', cellState);
   }, []);
 
   return (
