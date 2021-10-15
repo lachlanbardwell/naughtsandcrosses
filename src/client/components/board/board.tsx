@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { UserContext } from 'client/context';
 import { WinningMessage } from '../winning-message/winning-message';
-import '../board/board.scss';
 import { CellContainer } from './board.styles';
 import { Cell } from './cell';
 import { TeamType } from 'client/types/enums';

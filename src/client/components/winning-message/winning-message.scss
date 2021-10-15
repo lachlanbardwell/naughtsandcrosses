@@ -23,3 +23,13 @@
   transition: 200ms;
   box-shadow: none;
 }
+
+@media (max-width: 750px) {
+  .winning-div > h2 {
+    margin-left: 20%;
+  }
+
+  .winning-div > button {
+    margin-bottom: 20%;
+  }
+}

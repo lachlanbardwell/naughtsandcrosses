@@ -1,4 +1,11 @@
 #returnButton {
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 15%;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  transition: 200ms;
+  box-shadow: none;
 }
