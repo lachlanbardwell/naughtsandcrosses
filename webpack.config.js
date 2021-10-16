@@ -16,6 +16,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'client', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
     filename: 'bundle.js',
   },
   resolve: {
@@ -33,6 +34,17 @@ module.exports = {
         ],
       },
       {
+        // Transpiles ES6-8 into ES5
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+          },
+        },
+      },
+      {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
@@ -46,6 +58,10 @@ module.exports = {
         loader: 'file-loader',
       },
     ],
+  },
+  performance: {
+    maxEntrypointSize: 400000,
+    maxAssetSize: 400000,
   },
   plugins: [
     ...(isDevelopment
