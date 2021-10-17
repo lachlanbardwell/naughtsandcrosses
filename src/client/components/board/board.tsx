@@ -106,7 +106,6 @@ export const Board: React.FC = () => {
           />
         ))}
       </CellContainer>
-      <button onClick={() => console.log(state.user)}>state</button>
       {!gameRunning && (
         <WinningMessage
           winningTeam={winningTeam}

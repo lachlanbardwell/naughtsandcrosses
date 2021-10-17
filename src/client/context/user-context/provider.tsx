@@ -1,13 +1,12 @@
 import { IUser } from 'client/types/user-form-state';
-import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import { UserContext } from './context';
 import { initialUserState } from './default-user';
 import { userReducer } from './reducer';
 
 export const UserProvider: React.FC = (props) => {
-  //Check if data exists in sessionStorage before setting intial state
   const [state, dispatch] = useReducer(userReducer, initialUserState);
-
+  //Set session storage to retain user object state
   useEffect(() => {
     sessionStorage.setItem('User State', JSON.stringify(state.user));
   }, [state]);
