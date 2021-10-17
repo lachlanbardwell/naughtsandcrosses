@@ -18,12 +18,13 @@ const gridLookup = Object.freeze([
 ]);
 
 export const Board: React.FC = () => {
-  const { state, setUserTeam } = useContext(UserContext);
   //Initial setting of user team randomly to naughts or crosses
   useCallback(
     () => (Math.random() > 0.5 ? setUserTeam(true) : setUserTeam(false)),
     [],
   );
+  const { state, setUserTeam } = useContext(UserContext);
+
   //Initial state map of cells to create empty board
   const [cellState, setCellState] = useState(() =>
     Array.from(Array(9).keys()).map(() => TeamType.DEFAULT),
@@ -105,6 +106,7 @@ export const Board: React.FC = () => {
           />
         ))}
       </CellContainer>
+      <button onClick={() => console.log(state.user)}>state</button>
       {!gameRunning && (
         <WinningMessage
           winningTeam={winningTeam}

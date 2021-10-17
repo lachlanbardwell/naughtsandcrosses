@@ -9,6 +9,7 @@ const isDevelopment = process.env.NODE_ENV === 'DEVELOPMENT';
 module.exports = {
   devServer: {
     port: 3000,
+    // proxy: { '/': 'http://localhost:3100' },
     historyApiFallback: true,
   },
   devtool: isDevelopment ? 'source-map' : false,
@@ -16,7 +17,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'client', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: isDevelopment ? '' : '/dist/',
     filename: 'bundle.js',
   },
   resolve: {
@@ -32,17 +33,6 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ],
-      },
-      {
-        // Transpiles ES6-8 into ES5
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [['@babel/preset-env', { targets: 'defaults' }]],
-          },
-        },
       },
       {
         test: /\.tsx?$/,
