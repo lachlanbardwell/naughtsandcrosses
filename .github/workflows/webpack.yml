@@ -26,6 +26,7 @@ jobs:
       run: | 
         git checkout -b gh-pages
         git merge master
+        git worktree add -f dist gh-pages
         
     - name: Git
       run: |
@@ -36,7 +37,6 @@ jobs:
       run: |
         npm install
         npm run build
-        git worktree add -f dist gh-pages
         git commit -m "added build files"
         git push origin gh-pages 
 
