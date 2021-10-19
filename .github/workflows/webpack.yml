@@ -21,12 +21,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Deploy
-      run: | 
-        git checkout -b gh-pages
-        git fetch origin
-        git merge master
         
     - name: Git
       run: |
@@ -37,9 +31,8 @@ jobs:
       run: |
         git worktree add -f dist gh-pages
         npm install
-        npm run build        
-        git add -f dist/*
+        npm run build
+        git add -f dist
         git commit -m "added build files"
-        git pull origin gh-pages
-        git push origin gh-pages
+        git push origin gh-pages --force
 
