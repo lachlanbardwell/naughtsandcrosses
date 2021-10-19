@@ -33,6 +33,7 @@ jobs:
         git worktree add -f dist gh-pages
         npm install
         npm run build
+        cd dist
         git add -f dist
         git commit -m "added build files"
         git push origin gh-pages --force
