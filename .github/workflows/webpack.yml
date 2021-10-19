@@ -29,6 +29,7 @@ jobs:
         
     - name: Build
       run: |
+        git checkout -b gh-pages
         git worktree add -f dist gh-pages
         npm install
         npm run build
