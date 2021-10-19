@@ -25,6 +25,7 @@ jobs:
     - name: Deploy
       run: | 
         git checkout -b gh-pages
+        git fetch origin
         git merge master
         
     - name: Git
