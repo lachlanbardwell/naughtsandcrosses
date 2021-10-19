@@ -40,5 +40,6 @@ jobs:
         npm run build        
         git add -f dist/*
         git commit -m "added build files"
+        git pull
         git push origin gh-pages
 
