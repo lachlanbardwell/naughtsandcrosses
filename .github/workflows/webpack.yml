@@ -34,9 +34,10 @@ jobs:
         
     - name: Build
       run: |
+        git worktree add -f dist gh-pages
         npm install
-        npm run build
-        git worktree add -f dist
+        npm run build        
+        git add dist/*
         git commit -m "added build files"
-        git push origin gh-pages 
+        git push origin gh-pages
 
