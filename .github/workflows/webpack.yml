@@ -34,7 +34,7 @@ jobs:
         npm install
         npm run build
         cd dist
-        git add --all
+        git add --all --force
         git commit -m "added build files"
         git push origin gh-pages --force
 
