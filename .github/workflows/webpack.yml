@@ -35,7 +35,7 @@ jobs:
         echo 'xando.lachieb.dev' > dist/CNAME
         npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
       env: 
-        GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
+        echo GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_DEBUG: gh-pages
         
