@@ -22,7 +22,7 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
     axios
       .get(
         //
-        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${image}&limit=11&offset=0&rating=g&lang=en`,
+        `https://api.giphy.com/v1/gifs/search?api_key=PYDK0o7uAlgzrFxg4zqBE0WqOnOoBMxr&q=${image}&limit=11&offset=0&rating=g&lang=en`,
       )
       .then((res) =>
         setDisplayImage(
