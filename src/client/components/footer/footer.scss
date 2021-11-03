@@ -1,7 +1,78 @@
 footer {
-  position: fixed;
-  bottom: 0;
-  margin-bottom: 10px;
-  margin-left: 10px;
   color: white;
+  background-color: #282c34;
+  position: relative;
+  margin-top: 100px;
+  height: 30vh;
+  padding: 15px;
+}
+
+.copyFootLeft {
+  margin-left: 14%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.copyFootRight {
+  float: right;
+  margin-right: 14%;
+  margin-bottom: 10px;
+}
+
+.legal a {
+  color: white;
+  font-size: 12;
+  text-decoration: none;
+}
+
+.legal ul {
+  list-style-type: none;
+}
+
+.social {
+  margin-top: 25px;
+  padding: 15px;
+}
+
+.social ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  list-style-type: none;
+}
+
+.social li {
+  padding: 0 15px;
+}
+
+.social img {
+  max-width: 45px;
+  max-height: 35px;
+  padding: 10px;
+}
+
+@media (max-width: 750px) {
+  footer {
+    margin-bottom: 0;
+    margin-top: 50px;
+    height: 50vh;
+    padding: 15px;
+  }
+
+  .copyFootRight {
+    float: none;
+    margin-left: 14%;
+    margin-bottom: 40px;
+    padding: 10px;
+  }
+
+  .social li {
+    padding: 0 10px;
+  }
+
+  .social img {
+    margin-left: -30%;
+    padding: 0;
+  }
 }
