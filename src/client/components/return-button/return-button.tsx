@@ -8,14 +8,16 @@ export const ReturnButton: React.FC = () => {
   const history = useHistory();
 
   return (
-    <button
-      id="returnButton"
-      onClick={() => {
-        logout();
-        history.push({ pathname: '/' });
-      }}
-    >
-      Logout
-    </button>
+    <div className="logoutContainer">
+      <button
+        id="returnButton"
+        onClick={() => {
+          logout();
+          history.push({ pathname: '/' });
+        }}
+      >
+        Logout
+      </button>
+    </div>
   );
 };

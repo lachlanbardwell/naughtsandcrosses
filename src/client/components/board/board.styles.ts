@@ -4,6 +4,10 @@ export interface ICellStyle {
   isHover?: boolean;
 }
 
+export const BoardContainer = styled.div`
+  flex: 1 1 auto;
+`;
+
 export const CellContainer = styled.div`
   display: flex;
   width: 310px;

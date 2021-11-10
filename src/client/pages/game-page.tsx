@@ -1,8 +1,8 @@
-import { LachFooter } from 'client/components/footer/footer';
+import React from 'react';
+import { Board } from 'client/components/board/board';
 import { ReturnButton } from 'client/components/return-button/return-button';
 import { SessionDetails } from 'client/components/session-details/session-details';
-import React from 'react';
-import { Board } from '../components/board/board';
+import styled from 'styled-components';
 
 export const GamePage: React.FC = () => {
   return (
@@ -10,7 +10,6 @@ export const GamePage: React.FC = () => {
       <SessionDetails />
       <Board />
       <ReturnButton />
-      <LachFooter />
     </>
   );
 };

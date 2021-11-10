@@ -2,22 +2,25 @@ footer {
   color: white;
   background-color: #282c34;
   position: relative;
-  margin-top: 200px;
-  height: 30vh;
+  height: 200px;
   padding: 15px;
 }
 
+.footerText {
+  align-items: flex-end;
+  display: flex;
+  padding: 0 40px;
+}
+
 .copyFootLeft {
-  margin-left: 14%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  float: left;
+  flex: 1 1 auto;
+  width: 30%;
 }
 
 .copyFootRight {
-  float: right;
-  margin-right: 14%;
-  margin-bottom: 10px;
+  flex: 1 1 auto;
+  text-align: right;
+  width: 30%;
 }
 
 .legal a {
@@ -31,13 +34,12 @@ footer {
 }
 
 .social {
-  margin-top: 25px;
   padding: 15px;
 }
 
 .social ul {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
   list-style-type: none;
 }
@@ -52,19 +54,24 @@ footer {
   padding: 10px;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 600px) {
   footer {
-    margin-bottom: 0;
-    margin-top: 50px;
-    height: 50vh;
-    padding: 15px;
+    height: 250px;
+  }
+
+  .footerText {
+    display: block;
+    padding: 0 10px;
+  }
+
+  .copyFootLeft {
+    width: 100%;
   }
 
   .copyFootRight {
-    float: none;
-    margin-left: 14%;
-    margin-bottom: 40px;
-    padding: 10px;
+    width: 100%;
+    padding-top: 15px;
+    text-align: left;
   }
 
   .social li {
@@ -76,3 +83,28 @@ footer {
     padding: 0;
   }
 }
+
+// @media (max-width: 750px) {
+//   footer {
+//     margin-bottom: 0;
+//     margin-top: 50px;
+//     height: 50vh;
+//     padding: 15px;
+//   }
+
+//   .copyFootRight {
+//     float: none;
+//     margin-left: 14%;
+//     margin-bottom: 40px;
+//     padding: 10px;
+//   }
+
+//   .social li {
+//     padding: 0 10px;
+//   }
+
+//   .social img {
+//     margin-left: -30%;
+//     padding: 0;
+//   }
+// }

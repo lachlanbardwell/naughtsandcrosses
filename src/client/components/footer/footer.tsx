@@ -35,17 +35,19 @@ export const LachFooter: React.FC = () => {
           ))}
         </ul>
       </nav>
-      <div className="copyFootRight">
-        <span className="legal">
-          {otherLinks.map((next, ind) => (
-            <p key={ind}>
-              <a href="#">{next}</a>
-            </p>
-          ))}
-        </span>
-      </div>
-      <div className="copyFootLeft">
-        <p>&copy; Lachlan Bardwell 2021</p>
+      <div className="footerText">
+        <div className="copyFootLeft">
+          <span className="legal">
+            {otherLinks.map((next, ind) => (
+              <p key={ind}>
+                <a href="#">{next}</a>
+              </p>
+            ))}
+          </span>
+        </div>
+        <div className="copyFootRight">
+          <p>&copy; Lachlan Bardwell 2021</p>
+        </div>
       </div>
     </footer>
   );

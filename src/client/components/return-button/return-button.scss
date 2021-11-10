@@ -1,6 +1,11 @@
 #returnButton {
   margin: 0 auto;
-  margin-top: 15%;
+  display: flex;
+}
+
+.logoutContainer {
+  flex: 0 0 auto;
+  padding: 24px 0;
 }
 
 button:hover {

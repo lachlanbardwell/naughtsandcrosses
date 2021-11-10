@@ -1,11 +1,14 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import { GamePage } from './game-page';
 import { LoginPage } from './login-page';
+import { PageLayout } from './page-layout';
 
 export const Routes: React.FC = () => (
-  <BrowserRouter>
-    <Route exact component={LoginPage} path="/" />
-    <Route exact component={GamePage} path="/game" />
-  </BrowserRouter>
+  <PageLayout>
+    <HashRouter>
+      <Route exact component={LoginPage} path="/" />
+      <Route exact component={GamePage} path="/game" />
+    </HashRouter>
+  </PageLayout>
 );

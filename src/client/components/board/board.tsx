@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { UserContext } from 'client/context';
 import { WinningMessage } from '../winning-message/winning-message';
-import { CellContainer } from './board.styles';
+import { BoardContainer, CellContainer } from './board.styles';
 import { Cell } from './cell';
 import { TeamType } from 'client/types/enums';
 
@@ -94,7 +94,7 @@ export const Board: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <BoardContainer>
       <CellContainer onMouseLeave={() => onCellHover(-1)}>
         {cellState.map((cell, ind) => (
           <Cell
@@ -114,6 +114,6 @@ export const Board: React.FC = () => {
           setGameRunning={setGameRunning}
         />
       )}
-    </>
+    </BoardContainer>
   );
 };
