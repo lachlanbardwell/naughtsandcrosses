@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import '../winning-message/winning-message.scss';
 import { TeamType } from 'client/types/enums';
+import { IImgResponse } from 'client/types/img-data';
 
 const determineImage: () => number = () => {
   return Math.round(Math.random() * 10);
@@ -21,14 +22,13 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   useEffect(() => {
     axios
       .get(
-        //
         `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${image}&limit=11&offset=0&rating=g&lang=en`,
       )
-      .then((res) =>
+      .then((res) => {
         setDisplayImage(
-          res.data.data.map((img: any) => img.images.preview.mp4),
-        ),
-      )
+          res.data.data.map((img: IImgResponse) => img.images.preview.mp4),
+        );
+      })
       .catch((error) => {
         throw new Error(error);
       });
