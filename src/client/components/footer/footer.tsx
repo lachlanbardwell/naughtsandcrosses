@@ -46,7 +46,7 @@ export const LachFooter: React.FC = () => {
           </span>
         </div>
         <div className="copyFootRight">
-          <p>&copy; Lachlan Bardwell 2021</p>
+          <p>&copy; Lachlan Bardwell 2022</p>
         </div>
       </div>
     </footer>

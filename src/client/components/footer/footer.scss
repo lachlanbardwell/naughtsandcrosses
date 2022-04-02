@@ -2,7 +2,7 @@ footer {
   color: white;
   background-color: #282c34;
   position: relative;
-  height: 200px;
+  height: 100%;
   padding: 15px;
 }
 
@@ -55,10 +55,6 @@ footer {
 }
 
 @media (max-width: 600px) {
-  footer {
-    height: 250px;
-  }
-
   .footerText {
     display: block;
     padding: 0 10px;
