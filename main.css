@@ -11,5 +11,5 @@ h3{color:#fa4242}#inputLogin{display:flex;padding:7px 12px;border-radius:5px;fon
 
 footer{color:white;background-color:#282c34;position:relative;height:100%;padding:15px}.footerText{align-items:flex-end;display:flex;padding:0 40px}.copyFootLeft{flex:1 1 auto;width:30%}.copyFootRight{flex:1 1 auto;text-align:right;width:30%}.legal a{color:white;font-size:12;text-decoration:none}.legal ul{list-style-type:none}.social{padding:15px}.social ul{display:flex;justify-content:space-between;align-items:flex-start;list-style-type:none}.social li{padding:0 15px}.social img{max-width:45px;max-height:35px;padding:10px}@media (max-width: 600px){.footerText{display:block;padding:0 10px}.copyFootLeft{width:100%}.copyFootRight{width:100%;padding-top:15px;text-align:left}.social li{padding:0 10px}.social img{margin-left:-30%;padding:0}}
 
-.toolbar{font-family:Play, sans-serif}
+a{text-decoration:none;color:black}.toolbar{font-family:Play, sans-serif}
 
