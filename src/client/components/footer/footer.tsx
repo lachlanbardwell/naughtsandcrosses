@@ -1,32 +1,23 @@
 import React from 'react';
-import '../footer/footer.scss';
-import facebook from '../../../shared/images/facebook-white.svg';
-import instagram from '../../../shared/images/instagram-white.svg';
 import linkedin from '../../../shared/images/linkedin-white.svg';
-import twitter from '../../../shared/images/twitter-white.svg';
-import youtube from '../../../shared/images/youtube-white.svg';
+import github from '../../../shared/images/GitHub-Mark-Light-64px.png';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import './footer.scss';
 
-const socials: string[] = [facebook, instagram, linkedin, twitter, youtube];
-const otherLinks: string[] = [
-  'Terms & Conditions',
-  'Legal Disclaimer',
-  'About Lachie B',
-  'Testimonials',
-  'Contact Us',
-];
+const socials: string[] = [linkedin, github];
 
-export const LachFooter: React.FC = () => {
+export const Footer: React.FC = () => {
   return (
     <footer>
       <nav className="social">
         <ul>
-          {socials.map((next, ind) => (
-            <li key={ind}>
+          {socials.map((next, index) => (
+            <li key={index}>
               <a
                 href={
                   next === linkedin
                     ? 'https://www.linkedin.com/in/lachlan-bardwell'
-                    : '#'
+                    : 'https://github.com/KnowsJudo/'
                 }
               >
                 <img src={next} alt={`Find us on ${next}`} />
@@ -35,19 +26,18 @@ export const LachFooter: React.FC = () => {
           ))}
         </ul>
       </nav>
-      <div className="footerText">
-        <div className="copyFootLeft">
-          <span className="legal">
-            {otherLinks.map((next, ind) => (
-              <p key={ind}>
-                <a href="#">{next}</a>
-              </p>
-            ))}
-          </span>
-        </div>
-        <div className="copyFootRight">
-          <p>&copy; Lachlan Bardwell 2022</p>
-        </div>
+      <div className="footer-contact">
+        <p>&copy; Lachlan Bardwell 2022</p>
+        <span className="footer-a">
+          <MailOutlineIcon />
+          <a href="mailto:Lachbardwell@gmail.com?subject=Enquiry from website">
+            &nbsp;Contact
+          </a>
+        </span>
+
+        <a className="logo" href="https://clearbit.com">
+          Logos provided by Clearbit
+        </a>
       </div>
     </footer>
   );
