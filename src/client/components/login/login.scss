@@ -1,68 +1,84 @@
-h3 {
-  color: #fa4242;
-}
-
 #inputLogin {
   display: flex;
   padding: 7px 12px;
   border-radius: 5px;
   font-size: 20px;
   border-width: 1px;
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #282c34;
 }
 
 #inputLogin:hover {
-  transition: 500ms;
   cursor: pointer;
-  box-shadow: 2px 2px 0 #b1b1b1;
+}
+
+.formContainer {
 }
 
 .formHeading {
-  font-size: 50px;
+  font-size: 35px;
   display: flex;
   justify-content: center;
   margin: 20px;
 }
 
+.infoSpan {
+  display: flex;
+  margin: auto 10%;
+  justify-content: space-evenly;
+}
+
+.loadImage {
+  margin: auto;
+  height: 80px;
+  width: 80px;
+}
+
 .loginDiv {
-  margin-left: 40%;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5% auto 5% auto;
 }
 
 .loginDiv > h3 {
-  margin-left: -20%;
   padding: 10px;
 }
 
+.loginError {
+  margin: 3% auto;
+  width: 70%;
+}
+
 .loginForm {
-  margin-left: -20%;
-  margin-bottom: 20px;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
 }
 
 .loginContainer {
   background-color: #ffffff;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   justify-content: center;
-  margin: 20px;
-  margin-bottom: 15%;
+  margin: 10% 30%;
   border: 1px solid #000000;
   border-radius: 5px;
 }
 
-.userInput {
-  margin-left: 40%;
-  margin-bottom: 10px;
-  margin-top: 20px;
+.loginForm > .userInput {
+  margin: auto;
+  width: 70%;
 }
 
-.descriptInput {
-  margin-left: 40%;
+.loginForm > .descriptInput {
+  margin: 1% auto;
+  width: 70%;
 }
 
-@media (min-width: 750px) {
+@media (max-width: 750px) {
   .loginContainer {
-    margin-top: 10%;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin: 8%;
   }
 }

@@ -13,9 +13,9 @@ body {
     rgba(30, 255, 181, 1) 31%,
     rgba(255, 177, 244, 1) 86%
   );
-  background-size: cover;
-  min-width: 100vw;
-  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
 }
 
 button {

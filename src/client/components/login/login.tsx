@@ -4,6 +4,9 @@ import { IUser } from 'client/types/user-form-state';
 import { loginHelper } from 'client/utils/login';
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { TextField, Tooltip } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import logo from 'shared/images/1476.gif';
 import '../login/login.scss';
 
@@ -15,7 +18,7 @@ export const UserLogin: React.FC = () => {
     team: TeamType.DEFAULT,
   });
 
-  const handleSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit: React.FormEventHandler<HTMLInputElement> = (event) => {
     event.preventDefault();
     let validate = loginHelper(formState.username!, formState.descript!);
     if (validate !== 'logging in') {
@@ -37,32 +40,50 @@ export const UserLogin: React.FC = () => {
 
   return (
     <div className="loginContainer">
-      <h2 className="formHeading">Enter your details</h2>
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <input
-          className="userInput"
-          type="text"
-          placeholder="Username"
-          value={formState.username}
-          onChange={handleChange('username')}
-        />
-        <input
-          className="descriptInput"
-          type="text"
-          placeholder="Description"
-          value={formState.descript}
-          onChange={handleChange('descript')}
-        />
+      <h3 className="formHeading">Log In</h3>
+      <div className="formContainer">
+        <form className="loginForm">
+          <TextField
+            className="userInput"
+            type="text"
+            placeholder="Username"
+            value={formState.username}
+            onChange={handleChange('username')}
+            variant="outlined"
+          />
+          <TextField
+            className="descriptInput"
+            type="text"
+            placeholder="Description"
+            value={formState.descript}
+            onChange={handleChange('descript')}
+            variant="outlined"
+          />
+        </form>
         <div className="loginDiv">
           {state.isLoading ? (
-            <img src={logo} />
+            <img src={logo} className="loadImage" />
           ) : (
-            <input id="inputLogin" type="submit" value="Login"></input>
+            <span className="infoSpan">
+              <input
+                id="inputLogin"
+                type="submit"
+                value="Login"
+                onClick={(e) => handleSubmit(e)}
+              />
+              <Tooltip title="Stats will be retained on refresh">
+                <HelpOutlineIcon />
+              </Tooltip>
+            </span>
           )}
-          {state.isLoggedIn ? <Redirect push to="/game"></Redirect> : null}
-          {state.error && <h3>One or more required fields missing</h3>}
+          {state.isLoggedIn && <Redirect push to="/game"></Redirect>}
+          {state.error && (
+            <Alert className="loginError" severity="error">
+              One or more required fields missing
+            </Alert>
+          )}
         </div>
-      </form>
+      </div>
     </div>
   );
 };

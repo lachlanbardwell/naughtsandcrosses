@@ -14,6 +14,7 @@ footer {
 .footer-a > a {
   color: white;
   align-items: center;
+  text-decoration: none;
 }
 
 .footer-contact {
@@ -23,7 +24,8 @@ footer {
   margin: 0 30% 0 30%;
 }
 
-.footer-contact > a {
+.otherLinks {
+  display: flex;
   color: white;
 }
 

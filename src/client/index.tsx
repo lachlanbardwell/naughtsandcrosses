@@ -8,7 +8,7 @@ import { TopBar } from './components/app-bar/app-bar';
 const App: React.FC = () => {
   return (
     <UserProvider>
-      <TopBar />
+      {/* <TopBar /> */}
       <Routes />
     </UserProvider>
   );
