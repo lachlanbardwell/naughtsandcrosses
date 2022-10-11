@@ -1,0 +1,24 @@
+.notFoundContainer {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  justify-content: center;
+  margin: 10% 30%;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.notFoundContainer > .homeLink {
+  text-decoration: none;
+}
+
+.homeLink > .homeButton {
+  background-color: white;
+}
+
+.notFoundHead {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
