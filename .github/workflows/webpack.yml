@@ -2,40 +2,39 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    environment: github-pages
     strategy:
       matrix:
         node-version: [16.x]
-    
-    steps:
-    - uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        
-    - name: Git
-      run: |
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config user.name "github-actions[bot]"
-        
-    - name: Build
-      run: |
-        npm install
-        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-        npm run build
-        echo 'xando.lachieb.dev' > dist/CNAME
-        npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
-      env: 
-        GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NODE_DEBUG: gh-pages
-        
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Git
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Build
+        run: |
+          npm install
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run build
+          echo 'xando.lachieb.dev' > dist/CNAME
+          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_DEBUG: gh-pages

@@ -1,3 +1,13 @@
 # Naughts and Crosses Game
 
-Standard game designed by Lachie B (not using Create react app)
+Built using webpack. User stats are retained in context as well as local storage. Styled and logic using styled-components.
+
+To initialise project type
+
+```
+npm i
+```
+
+```
+npm run start
+```
