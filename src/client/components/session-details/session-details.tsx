@@ -9,7 +9,6 @@ export const SessionDetails: React.FC<ISessionProps> = (props) => {
 
   useEffect(() => {
     Math.random() <= 0.5 ? setUserTeam(true) : setUserTeam(false);
-    console.log(state);
   }, []);
 
   const displayTeamName: (userTeam?: number) => string = (userTeam) => {

@@ -101,7 +101,6 @@ export const Board: React.FC<IBoardProps> = (props) => {
       props.setCurrentTeam(
         props.currentTeam === TeamType.CROSS ? TeamType.NAUGHT : TeamType.CROSS,
       );
-      console.log(props.currentTeam, 'fafas');
       setClearBoard(false);
     },
     [props.currentTeam],
