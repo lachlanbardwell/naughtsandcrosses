@@ -27,11 +27,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
 
-      - name: Add env variable
-        run: |
-          echo "GIPHY_API_KEY=${{secrets.GIPHY_API_KEY}}" > .env
-
       - name: Build
+        env:
+          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_DEBUG: gh-pages
         run: |
           npm install
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
