@@ -18,7 +18,9 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   useEffect(() => {
     props.winningTeam === state.user?.team
       ? setImage('pogchamp')
-      : setImage('white guy blinking');
+      : props.winningTeam === TeamType.DEFAULT
+      ? setImage('white guy blinking')
+      : setImage('you get nothing');
   }, []);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
             <h2>
               {props.winningTeam === state.user.team
                 ? `${state.user.username} Wins!`
-                : `You Lose! Player 2 Wins!`}
+                : `You Lose! ${state.user.opponent} Wins!`}
             </h2>
           ) : (
             <h2>It's a draw!</h2>

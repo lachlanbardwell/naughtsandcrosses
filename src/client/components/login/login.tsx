@@ -13,15 +13,15 @@ import '../login/login.scss';
 export const UserLogin: React.FC = () => {
   const { login, setUserSuccess, state } = useContext(UserContext);
   const [formState, setFormState] = useState<IUser>({
-    descript: '',
     username: '',
+    opponent: '',
     team: TeamType.DEFAULT,
     record: { wins: 0, losses: 0, draws: 0 },
   });
 
   const handleSubmit: React.FormEventHandler<HTMLInputElement> = (event) => {
     event.preventDefault();
-    let validate = loginHelper(formState.username!, formState.descript!);
+    let validate = loginHelper(formState.username!, formState.opponent!);
     if (validate !== 'logging in') {
       setUserSuccess(false);
       return;
@@ -47,17 +47,17 @@ export const UserLogin: React.FC = () => {
           <TextField
             className="userInput"
             type="text"
-            placeholder="Username"
+            placeholder="Your Username"
             value={formState.username}
             onChange={handleChange('username')}
             variant="outlined"
           />
           <TextField
-            className="descriptInput"
+            className="secondPlayerInput"
             type="text"
-            placeholder="Description"
-            value={formState.descript}
-            onChange={handleChange('descript')}
+            placeholder="Player 2 Username"
+            value={formState.opponent}
+            onChange={handleChange('opponent')}
             variant="outlined"
           />
         </form>
@@ -72,7 +72,7 @@ export const UserLogin: React.FC = () => {
                 value="Login"
                 onClick={(e) => handleSubmit(e)}
               />
-              <Tooltip title="Stats will be retained on refresh">
+              <Tooltip title="Teams are randomly assigned and can be re-rolled on refresh. Player stats will be retained.">
                 <HelpOutlineIcon />
               </Tooltip>
             </span>
@@ -80,7 +80,7 @@ export const UserLogin: React.FC = () => {
           {state.isLoggedIn && <Redirect push to="/game"></Redirect>}
           {state.error && (
             <Alert className="loginError" severity="error">
-              One or more required fields missing
+              Required fields missing
             </Alert>
           )}
         </div>

@@ -6,7 +6,7 @@ export interface IBoardProps {
 }
 export interface IUser {
   username?: string;
-  descript?: string;
+  opponent?: string;
   team?: TeamType;
   record?: IUserRecord;
 }

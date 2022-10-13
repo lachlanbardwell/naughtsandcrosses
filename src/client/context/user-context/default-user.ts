@@ -7,7 +7,7 @@ export const initialUserState: IUserState = {
     ? JSON.parse(sessionStorage.getItem('User State') as string)
     : {
         username: '',
-        descript: '',
+        opponent: '',
         team: TeamType.DEFAULT,
       },
   isLoading: false,

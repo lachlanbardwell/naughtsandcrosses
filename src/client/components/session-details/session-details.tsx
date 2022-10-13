@@ -16,7 +16,7 @@ export const SessionDetails: React.FC<ISessionProps> = (props) => {
   return (
     <span className="sessionSpan">
       <h2 className="sessionSecondUser">
-        Player 2 Team:&nbsp;
+        {state.user?.opponent} team:&nbsp;
         {state.user?.team === 2 ? (
           <RadioButtonUncheckedIcon style={{ fontSize: 30 }} />
         ) : (
@@ -25,7 +25,7 @@ export const SessionDetails: React.FC<ISessionProps> = (props) => {
       </h2>
       <span className="sessionStats">
         <h2 className="sessionUser">
-          {state.user?.username} Team:&nbsp;
+          {state.user?.username} team:&nbsp;
           {state.user?.team === 1 ? (
             <RadioButtonUncheckedIcon style={{ fontSize: 30 }} />
           ) : (

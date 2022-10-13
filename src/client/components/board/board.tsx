@@ -62,18 +62,6 @@ export const Board: React.FC<IBoardProps> = (props) => {
     setWinningTeam(cellState[match[0]]);
   }, [cellState]);
 
-  // useEffect(() => {
-  //   //Draw condition
-  //   if (winningTeam) {
-  //     return;
-  //   }
-  //   if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
-  //     setGameRunning(false);
-  //     setWinningTeam(TeamType.DEFAULT);
-  //     setUserWin('draw');
-  //   }
-  // }, [cellState, winningTeam]);
-
   useEffect(() => {
     //Reset board tiles only when child updates clearboard
     clearBoard &&
