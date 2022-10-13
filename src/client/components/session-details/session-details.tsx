@@ -11,10 +11,6 @@ export const SessionDetails: React.FC<ISessionProps> = (props) => {
     Math.random() <= 0.5 ? setUserTeam(true) : setUserTeam(false);
   }, []);
 
-  const displayTeamName: (userTeam?: number) => string = (userTeam) => {
-    return userTeam === 1 ? 'Naughts' : 'Crosses';
-  };
-
   return (
     <span className="sessionSpan">
       <h2 className="sessionUser">{`${state.user?.username} - ${

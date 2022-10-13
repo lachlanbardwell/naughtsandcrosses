@@ -27,6 +27,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
 
+      - name: Add env variable
+        run: |
+          echo "GIPHY_API_KEY=${{secrets.GIPHY_API_KEY}}" > .env
+
       - name: Build
         run: |
           npm install
@@ -34,7 +38,3 @@ jobs:
           npm run build
           echo 'xando.lachieb.dev' > dist/CNAME
           npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
-        env:
-          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_DEBUG: gh-pages
