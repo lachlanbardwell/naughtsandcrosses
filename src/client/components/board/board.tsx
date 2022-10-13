@@ -49,24 +49,30 @@ export const Board: React.FC<IBoardProps> = (props) => {
         cellState[cell3] === cellValue
       );
     });
+    if (
+      cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT) &&
+      !match
+    ) {
+      setUserWin('draw');
+      setGameRunning(false);
+    }
     if (!match) {
       return;
     }
     setWinningTeam(cellState[match[0]]);
   }, [cellState]);
 
-  useEffect(() => {
-    //Draw condition
-    if (winningTeam) {
-      return;
-    }
-    setTimeout(() => {
-      if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
-        setGameRunning(false);
-        setUserWin('draw');
-      }
-    }, 100);
-  }, [cellState]);
+  // useEffect(() => {
+  //   //Draw condition
+  //   if (winningTeam) {
+  //     return;
+  //   }
+  //   if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
+  //     setGameRunning(false);
+  //     setWinningTeam(TeamType.DEFAULT);
+  //     setUserWin('draw');
+  //   }
+  // }, [cellState, winningTeam]);
 
   useEffect(() => {
     //Reset board tiles only when child updates clearboard
@@ -77,9 +83,16 @@ export const Board: React.FC<IBoardProps> = (props) => {
   }, [gameRunning]);
 
   useEffect(() => {
+    console.log('winning team', winningTeam);
     //Ends game and displays result
+    if (clearBoard) {
+      return;
+    }
     if (winningTeam == TeamType.CROSS || winningTeam == TeamType.NAUGHT)
       setGameRunning(false);
+    if (winningTeam === TeamType.DEFAULT) {
+      return;
+    }
     if (winningTeam === state.user?.team) {
       setUserWin('win');
     } else {
