@@ -13,7 +13,7 @@ export interface IUserContext {
   state: IUserState;
   logout: () => void;
   setUserTeam: (isCrosses?: boolean) => void;
-  setUserWin: (isWinner?: boolean) => void;
+  setUserWin: (result: string) => void;
 }
 
 //Structure of state

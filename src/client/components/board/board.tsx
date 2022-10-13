@@ -4,6 +4,7 @@ import { WinningMessage } from '../winning-message/winning-message';
 import { BoardContainer, CellContainer } from './board.styles';
 import { Cell } from './cell';
 import { TeamType } from 'client/types/enums';
+import { IBoardProps } from 'client/types/user-form-state';
 
 //Array of possible win conditions based on cell index #
 const gridLookup = Object.freeze([
@@ -17,13 +18,14 @@ const gridLookup = Object.freeze([
   [2, 4, 6],
 ]);
 
-export const Board: React.FC = () => {
+export const Board: React.FC<IBoardProps> = (props) => {
   //Initial setting of user team randomly to naughts or crosses
   useCallback(
     () => (Math.random() > 0.5 ? setUserTeam(true) : setUserTeam(false)),
     [],
   );
-  const { state, setUserTeam } = useContext(UserContext);
+
+  const { state, setUserTeam, setUserWin } = useContext(UserContext);
 
   //Initial state map of cells to create empty board
   const [cellState, setCellState] = useState(() =>
@@ -61,6 +63,7 @@ export const Board: React.FC = () => {
     setTimeout(() => {
       if (cellState.every((cells: TeamType) => cells !== TeamType.DEFAULT)) {
         setGameRunning(false);
+        setUserWin('draw');
       }
     }, 100);
   }, [cellState]);
@@ -77,21 +80,32 @@ export const Board: React.FC = () => {
     //Ends game and displays result
     if (winningTeam == TeamType.CROSS || winningTeam == TeamType.NAUGHT)
       setGameRunning(false);
+    if (winningTeam === state.user?.team) {
+      setUserWin('win');
+    } else {
+      setUserWin('loss');
+    }
   }, [winningTeam]);
 
   const onCellHover = useCallback((nextIndex: number) => {
     setCellIndex(nextIndex);
   }, []);
 
-  const onCellClick = useCallback((nextIndex: number, type?: TeamType) => {
-    type &&
-      setCellState((prev) =>
-        prev.map((cell, index) => (index === nextIndex ? type : cell)),
+  const onCellClick = useCallback(
+    (nextIndex: number, type?: TeamType) => {
+      type &&
+        setCellState((prev) =>
+          prev.map((cell, index) => (index === nextIndex ? type : cell)),
+        );
+      //Change state on each click
+      props.setCurrentTeam(
+        props.currentTeam === TeamType.CROSS ? TeamType.NAUGHT : TeamType.CROSS,
       );
-    //Change state on each click
-    setUserTeam(type === TeamType.CROSS ? false : true);
-    setClearBoard(false);
-  }, []);
+      console.log(props.currentTeam, 'fafas');
+      setClearBoard(false);
+    },
+    [props.currentTeam],
+  );
 
   return (
     <BoardContainer>
@@ -99,9 +113,9 @@ export const Board: React.FC = () => {
         {cellState.map((cell, ind) => (
           <Cell
             key={ind}
-            onCellClick={() => onCellClick(ind, state.user?.team)}
+            onCellClick={() => onCellClick(ind, props.currentTeam)}
             onMouseOver={() => onCellHover(ind)}
-            hoverType={ind === cellIndex ? state.user?.team : TeamType.DEFAULT}
+            hoverType={ind === cellIndex ? props.currentTeam : TeamType.DEFAULT}
             type={cell}
           />
         ))}

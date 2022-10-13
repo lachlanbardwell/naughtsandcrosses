@@ -33,9 +33,9 @@ export const UserProvider: React.FC = (props) => {
     });
   }, []);
 
-  const setUserWin = useCallback((isWinner?: boolean) => {
+  const setUserWin = useCallback((result: string) => {
     dispatch({
-      type: isWinner ? 'win' : isWinner == false ? 'lose' : 'draw',
+      type: result === 'win' ? 'win' : result === 'loss' ? 'lose' : 'draw',
     });
   }, []);
 

@@ -16,6 +16,7 @@ export const UserLogin: React.FC = () => {
     descript: '',
     username: '',
     team: TeamType.DEFAULT,
+    record: { wins: 0, losses: 0, draws: 0 },
   });
 
   const handleSubmit: React.FormEventHandler<HTMLInputElement> = (event) => {

@@ -1,10 +1,10 @@
-import { UserContext } from 'client/context';
-import { IWinningTeam } from 'client/context/user-context/types';
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import '../winning-message/winning-message.scss';
+import { UserContext } from 'client/context';
+import { IWinningTeam } from 'client/context/user-context/types';
 import { TeamType } from 'client/types/enums';
 import { IImgResponse } from 'client/types/img-data';
+import '../winning-message/winning-message.scss';
 
 const determineImage: () => number = () => {
   return Math.round(Math.random() * 10);
@@ -16,7 +16,9 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   const [displayImage, setDisplayImage] = useState<string[]>([]);
 
   useEffect(() => {
-    props.winningTeam ? setImage('pogchamp') : setImage('white guy blinking');
+    props.winningTeam === state.user?.team
+      ? setImage('pogchamp')
+      : setImage('white guy blinking');
   }, []);
 
   useEffect(() => {
@@ -43,11 +45,12 @@ export const WinningMessage: React.FC<IWinningTeam> = (props) => {
   return (
     <div>
       {state.user && (
-        <div className="winning-div">
+        <div className="resultScreen">
           {props.winningTeam ? (
             <h2>
-              {state.user.username} Wins! Playing{' '}
-              {props.winningTeam == 1 ? 'Naughts' : 'Crosses'}{' '}
+              {props.winningTeam === state.user.team
+                ? `${state.user.username} Wins!`
+                : `You Lose! Player 2 Wins!`}
             </h2>
           ) : (
             <h2>It's a draw!</h2>

@@ -4,17 +4,17 @@
   flex-direction: column;
   flex: 1 1 auto;
   justify-content: center;
-  margin: 10% 30%;
+  margin: 10% 20%;
   border: 1px solid #000000;
   border-radius: 5px;
 }
 
-.notFoundContainer > .homeLink {
-  text-decoration: none;
-}
-
-.homeLink > .homeButton {
-  background-color: white;
+.notFoundContainer > .homeButton {
+  color: #ffffff;
+  margin: auto auto 3% auto;
+  background-color: #282c34;
+  font-size: 18px;
+  align-items: center;
 }
 
 .notFoundHead {

@@ -12,6 +12,7 @@ const PageContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  padding-bottom: 5%;
 `;
 
 export const PageLayout: React.FC = ({ children }) => (

@@ -1,4 +1,4 @@
-.winning-div {
+.resultScreen {
   position: fixed;
   z-index: 1;
   top: 0;
@@ -14,11 +14,11 @@
   font-size: 2em;
 }
 
-.winning-div > button {
+.resultScreen > button {
   margin-top: 10%;
 }
 
-.winning-div > button:hover {
+.resultScreen > button:hover {
   background-color: black;
   color: white;
   transition: 200ms;
@@ -26,11 +26,11 @@
 }
 
 @media (max-width: 750px) {
-  .winning-div > h2 {
+  .resultScreen > h2 {
     margin-left: 20%;
   }
 
-  .winning-div > button {
+  .resultScreen > button {
     margin-bottom: 20%;
   }
 }

@@ -1,8 +1,10 @@
 import { UserContext } from 'client/context';
+import { ISessionProps } from 'client/types/user-form-state';
 import React, { useContext, useEffect } from 'react';
+import { ReturnButton } from '../return-button/return-button';
 import './session-details.scss';
 
-export const SessionDetails: React.FC = () => {
+export const SessionDetails: React.FC<ISessionProps> = (props) => {
   const { state, setUserTeam } = useContext(UserContext);
 
   useEffect(() => {
@@ -11,19 +13,18 @@ export const SessionDetails: React.FC = () => {
   }, []);
 
   const displayTeamName: (userTeam?: number) => string = (userTeam) => {
-    if (userTeam === 1) return 'Naughts';
-    return 'Crosses';
+    return userTeam === 1 ? 'Naughts' : 'Crosses';
   };
 
   return (
-    <div className="sessionDiv">
-      <h2 className="sessionUser">{`Logged in as ${state.user?.username} - The player who is ${state.user?.descript}`}</h2>
-      <br />
-      {state.user && (
-        <h2 className="sessionTeam">{`${displayTeamName(
-          state.user?.team,
-        )} Turn`}</h2>
-      )}
-    </div>
+    <span className="sessionSpan">
+      <h2 className="sessionUser">{`${state.user?.username} - ${
+        state.user?.team === 1 ? 'Naughts' : 'Crosses'
+      }`}</h2>
+      <h2 className="sessionUser">{`Player 2 - ${
+        state.user?.team === 2 ? 'Naughts' : 'Crosses'
+      }`}</h2>
+      <ReturnButton />
+    </span>
   );
 };

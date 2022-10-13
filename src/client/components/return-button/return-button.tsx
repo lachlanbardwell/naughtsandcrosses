@@ -1,6 +1,7 @@
 import { UserContext } from 'client/context';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import './return-button.scss';
 
 export const ReturnButton: React.FC = () => {
@@ -8,16 +9,15 @@ export const ReturnButton: React.FC = () => {
   const history = useHistory();
 
   return (
-    <div className="logoutContainer">
-      <button
-        id="returnButton"
-        onClick={() => {
-          logout();
-          history.push({ pathname: '/' });
-        }}
-      >
-        Logout
-      </button>
-    </div>
+    <button
+      id="returnButton"
+      onClick={() => {
+        logout();
+        history.push({ pathname: '/' });
+      }}
+    >
+      Logout&nbsp;
+      <ExitToAppIcon />
+    </button>
   );
 };

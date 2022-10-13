@@ -56,19 +56,40 @@ export const userReducer = (
     case 'win': {
       return {
         ...state,
-        user: { ...state.user, winner: true },
+        user: {
+          ...state.user,
+          record: {
+            ...state.user?.record,
+            // @ts-ignore
+            wins: state.user?.record?.wins + 1,
+          },
+        },
       };
     }
     case 'lose': {
       return {
         ...state,
-        user: { ...state.user, winner: false },
+        user: {
+          ...state.user,
+          record: {
+            ...state.user?.record,
+            // @ts-ignore
+            losses: state.user?.record?.losses + 1,
+          },
+        },
       };
     }
     case 'draw': {
       return {
         ...state,
-        user: { ...state.user, winner: undefined },
+        user: {
+          ...state.user,
+          record: {
+            ...state.user?.record,
+            // @ts-ignore
+            draws: state.user?.record?.draws + 1,
+          },
+        },
       };
     }
 
