@@ -2,9 +2,9 @@
 
 .resultScreen{position:fixed;z-index:1;top:0;bottom:0;left:0;right:0;background-color:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;color:white;flex-direction:column;font-size:2em}.resultScreen>button{margin-top:10%}.resultScreen>button:hover{background-color:black;color:white;transition:200ms;box-shadow:none}@media (max-width: 750px){.resultScreen>h2{margin-left:20%}.resultScreen>button{margin-bottom:20%}}
 
-#returnButton{display:flex;align-items:center;margin-left:auto;margin-right:1%;padding:0;color:#ffffff;background-color:#282c34;font-size:16px;border:none}
+#returnButton{display:flex;align-items:center;margin-left:auto;padding:0;color:#ffffff;background-color:#282c34;font-size:16px;border:none}
 
-.sessionSpan{display:flex;flex:0 0 auto;margin-bottom:5%;align-items:center;color:#ffffff;background-color:#282c34}.sessionTeam{margin-left:1%}.sessionUser{margin-left:auto;border-radius:0px 0px 5px 5px}
+.sessionSpan{display:flex;flex:0 0 auto;margin-bottom:5%;align-items:center;color:#ffffff;background-color:#282c34}.sessionSecondUser{display:flex;align-items:center;margin-left:20%}.sessionStats{display:flex;flex:1 1 auto;margin-right:1%;align-items:center;line-height:0%}.sessionStats>p{margin-left:auto}.sessionUser{display:flex;align-items:center;margin-left:auto}@media (max-width: 800px){.sessionSecondUser{margin-left:auto}.sessionSpan{padding-bottom:5%}.sessionStats{flex-direction:column}.sessionUser,.sessionSecondUser{font-size:16px}}
 
 #inputLogin{display:flex;padding:7px 12px;border-radius:5px;font-size:20px;border-width:1px;color:#ffffff;background-color:#282c34}#inputLogin:hover{cursor:pointer}.formHeading{font-size:35px;display:flex;justify-content:center;margin:20px}.infoSpan{display:flex;margin:auto 10%;justify-content:space-evenly}.loadImage{margin:auto;height:80px;width:80px}.loginDiv{display:flex;flex-direction:column;justify-content:center;margin:5% auto 5% auto}.loginDiv>h3{padding:10px}.loginError{margin:3% auto;width:70%}.loginForm{display:flex;margin:auto;flex-direction:column}.loginContainer{background-color:#ffffff;display:flex;flex-direction:column;flex:1 1 auto;justify-content:center;margin:10% 30%;border:1px solid #000000;border-radius:5px}.loginForm>.userInput{margin:auto;width:70%}.loginForm>.descriptInput{margin:1% auto;width:70%}@media (max-width: 750px){.loginContainer{margin:8%}}
 
