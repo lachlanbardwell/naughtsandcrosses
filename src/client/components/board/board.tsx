@@ -71,7 +71,6 @@ export const Board: React.FC<IBoardProps> = (props) => {
   }, [gameRunning]);
 
   useEffect(() => {
-    console.log('winning team', winningTeam);
     //Ends game and displays result
     if (clearBoard) {
       return;
