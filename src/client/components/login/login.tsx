@@ -41,7 +41,7 @@ export const UserLogin: React.FC = () => {
 
   return (
     <div className="loginContainer">
-      <h3 className="formHeading">Log In</h3>
+      <h3 className="formHeading">Enter Player Names</h3>
       <div className="formContainer">
         <form className="loginForm">
           <TextField
@@ -69,7 +69,7 @@ export const UserLogin: React.FC = () => {
               <input
                 id="inputLogin"
                 type="submit"
-                value="Login"
+                value="Play"
                 onClick={(e) => handleSubmit(e)}
               />
               <Tooltip title="Teams are randomly assigned and can be re-rolled on refresh. Player stats will be retained.">
