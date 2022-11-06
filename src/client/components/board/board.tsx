@@ -41,7 +41,7 @@ export const Board: React.FC<IBoardProps> = (props) => {
 
   useEffect(() => {
     const match = gridLookup.find(([cell1, cell2, cell3]) => {
-      const cellValue = cellState[cell1];
+      const cellValue: number = cellState[cell1];
       //Checks the first cell has been clicked and matches the win grid, then checks next 2 cells in order
       return (
         cellValue !== TeamType.DEFAULT &&
