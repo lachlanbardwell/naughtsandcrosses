@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import linkedin from '../../../shared/images/linkedin-white.svg';
 import github from '../../../shared/images/GitHub-Mark-Light-64px.png';
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrowSharp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import './footer.scss';
@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
           </a>
         </span>
         <span className="otherLinks">
-          <p>Other Projects</p>
+          <a href="https://lachieb.dev">LachieB.dev</a>
           <IconButton
             id="anchor"
             aria-controls="basic-menu"
@@ -61,23 +61,24 @@ export const Footer: React.FC = () => {
               onClose={() => setVisible(false)}
               style={{ padding: 20 }}
             >
-              <MenuItem
-                onClick={() => window.open('https://shoppinglist.lachieb.dev')}
+              <a
+                href="https://shoppinglist.lachieb.dev"
+                style={{ textDecoration: 'none', color: 'black' }}
               >
-                Shopping List
-              </MenuItem>
-              <MenuItem
-                onClick={() => window.open('https://xando.lachieb.dev')}
+                <MenuItem>Shopping List</MenuItem>
+              </a>
+              <a
+                href="https://xando.lachieb.dev"
+                style={{ textDecoration: 'none', color: 'black' }}
               >
-                Naughts and Crosses
-              </MenuItem>
-              <MenuItem
-                onClick={() =>
-                  window.open('https://infinite-depths-41827.herokuapp.com/')
-                }
+                <MenuItem>Naughts and Crosses</MenuItem>
+              </a>
+              <a
+                href="https://kitchen.lachieb.dev"
+                style={{ textDecoration: 'none', color: 'black' }}
               >
-                Kitchen Daydreams
-              </MenuItem>
+                <MenuItem>Kitchen Daydreams</MenuItem>
+              </a>
             </Menu>
             <DoubleArrowIcon />
           </IconButton>

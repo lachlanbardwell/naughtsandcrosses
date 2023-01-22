@@ -27,6 +27,12 @@ footer {
 .otherLinks {
   display: flex;
   color: white;
+  align-items: center;
+}
+
+.otherLinks > a {
+  text-decoration: none;
+  color: white;
 }
 
 .social {
