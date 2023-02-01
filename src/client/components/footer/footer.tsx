@@ -62,6 +62,12 @@ export const Footer: React.FC = () => {
               style={{ padding: 20 }}
             >
               <a
+                href="https://quackle.net"
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                <MenuItem>Quackle</MenuItem>
+              </a>
+              <a
                 href="https://shoppinglist.lachieb.dev"
                 style={{ textDecoration: 'none', color: 'black' }}
               >
